@@ -1,0 +1,89 @@
+Cómo es t_game
+Cómo se guarda el mapa
+Cómo se guarda el player
+Cómo se accede a todo
+Función errores única
+
+¡¡HAY QUE VER QUE ES EL ALGORITMO DE CÁLCULO DE DISTACIA EN UN MAPA!!
+¡¡DDA (Diferential Analysing Analist)!!
+
+
+Estructura:
+
+cub3d/
+│
+├── includes/
+│   ├── cub3d.h
+│
+├── src/
+│   ├── main.c
+│
+│   ├── parsing/
+│   │   ├── parse_file.c
+│   │   ├── parse_map.c
+│   │   ├── parse_textures.c
+│   │   ├── parse_colors.c
+│   │   ├── validation.c
+│
+│   ├── init/
+│   │   ├── init_game.c
+│   │   ├── init_player.c
+│
+│   ├── render/
+│   │   ├── raycast.c
+│   │   ├── dda.c
+│   │   ├── draw.c
+│   │   ├── texture.c
+│
+│   ├── hooks/
+│   │   ├── key_hooks.c
+│   │   ├── movement.c
+│   │   ├── close.c
+│
+│   ├── utils/
+│   │   ├── free.c
+│   │   ├── error.c
+│
+└── Makefile
+
+
+1. Leer el archivo
+
+2. Parsear:
+
+    - NO / SO / WE / EA (texturas)
+    - F (floor color)
+    - C (ceiling color)
+    - El mapa
+
+3. Validar:
+
+    - Solo caracteres permitidos
+    - Un solo jugador
+    - Mapa cerrado
+    - RGB válidos
+    - Rutas válidas
+
+4. Inicialización gráfica (MiniLibX)
+    - mlx_init()
+    - mlx_new_window()
+    - Crear imagen
+    - Hook de teclado
+    - Hook de cerrar ventana
+
+Makefile
+
+Abrir y cerrar ventana sin leaks
+
+MAIN
+    init_game(&game);
+	parse_file(argv[1], &game);
+	start_game(&game);
+	free_game(&game);
+
+ERROR
+int	ft_error(char *msg)
+{
+	printf("Error\n%s\n", msg);
+	return (1);
+}
