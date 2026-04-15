@@ -6,9 +6,16 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/03/09 18:59:51 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/04/08 20:05:33 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef LIBFT_H
+# define LIBFT_H
+
+//includes => NO AÑADIDOS EN EL GIT, los define generales tampoco
+# include "../src/aux/libft/libft.h"
+# include "../src/aux/gnl/get_next_line.h"
 
 //estructura de imagen
 typedef struct s_imagen
@@ -40,8 +47,8 @@ typedef struct s_data
 	int			map_height;
 
 	//techo y suelo
-	int			floor_color;
-	int			ceiling_color;
+	int			floor_color[3];
+	int			ceiling_color[3];
 	
     //paredes
 	t_texture	north;
@@ -58,3 +65,5 @@ typedef struct s_data
 	double		plane_y;
 
 }	t_data;
+
+#endif
