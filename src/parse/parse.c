@@ -121,27 +121,27 @@ int	parse_texture(char *file, t_data *data)
 
 	if (type == 'N')
 	{
-		if (data->north)
+		if (data->north.path)
 			return (free(path), -1);
-		data->north = path;
+		data->north.path = path;
 	}
 	else if (type == 'S')
 	{
-		if (data->south)
+		if (data->south.path)
 			return (free(path), -1);
-		data->south = path;
+		data->south.path = path;
 	}
 	else if (type == 'E')
 	{
-		if (data->east)
+		if (data->east.path)
 			return (free(path), -1);
-		data->east = path;
+		data->east.path = path;
 	}
 	else if (type == 'W')
 	{
-		if (data->west)
+		if (data->west.path)
 			return (free(path), -1);
-		data->west = path;
+		data->west.path = path;
 	}
 	return (0);
 }
@@ -170,38 +170,4 @@ int	parse_elements(char *file, t_data *data)
 
 	//mapa no puede ser encontrado antes que todos los elementos
 	//preguntar ¿si no define algun elemento sale por error o se le asigna uno default?
-}
-
-int	main(int argc, char **argv)
-{
-	t_data	data;
-	int	fd;
-	char *file;
-
-	if (argc != 2)
-	{
-		error_arg;
-		return (1);
-	}
-
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		error("incorrect file");
-		return (1);
-	}
-	file = get_next_line(fd);
-	while (file)
-	{
-		if (parse_elements(file, &data) == -1)
-		{
-			error("misconfiguration file");
-			close(fd);
-			return (1);
-		}
-		free(file);
-		file = get_next_line(fd);
-	}
-	close(fd);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:46:51 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/04/28 13:12:01 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/04/28 13:38:35 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # endif
 
 char	*ft_strchr(const char *s, int c);
-size_t	ft_strlen(const char *s);
+//size_t	ft_strlen(const char *s);
 char	*ft_strjoin_free(char *s1, char *s2);
-char	*ft_strdup(const char *s);
+//char	*ft_strdup(const char *s);
 //char	*ft_substr(char *s, unsigned int start, size_t len);
 char	*get_next_line(int fd);
 

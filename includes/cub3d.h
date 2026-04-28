@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/04/28 12:59:50 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/04/28 13:34:32 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_imagen
 
 typedef struct s_texture
 {
+	char	*path;
 	void	*img;
 	char	*addr; //text_pixels
 	int		width;
@@ -80,5 +81,10 @@ typedef struct s_data
 
 void	error_arg(void);
 int		error(char *message);
+
+char	*skip_spaces(char *str);
+int		parse_color(char *file, t_data *data);
+int		parse_texture(char *file, t_data *data);
+int		parse_elements(char *file, t_data *data);
 
 #endif

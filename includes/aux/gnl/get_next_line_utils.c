@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:46:23 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/04/28 13:12:45 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/04/28 13:38:00 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-size_t	ft_strlen(const char *s)
+/*size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -38,7 +38,7 @@ size_t	ft_strlen(const char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
-}
+}*/
 
 char	*ft_strjoin_free(char *s1, char *s2)
 {
@@ -69,7 +69,7 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	return (join);
 }
 
-char	*ft_strdup(const char *s)
+/*char	*ft_strdup(const char *s)
 {
 	char	*dup;
 	int		i;
@@ -85,7 +85,7 @@ char	*ft_strdup(const char *s)
 	}
 	dup[i] = '\0';
 	return (dup);
-}
+}*/
 
 /*char	*ft_substr(char *s, unsigned int start, size_t len)
 {
