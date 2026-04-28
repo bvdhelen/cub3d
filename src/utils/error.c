@@ -1,3 +1,5 @@
+#include "cub3d.h"
+
 /*Función de error principal*/
 int	error(char *message)
 {

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:46:23 by ptrapero          #+#    #+#             */
-/*   Updated: 2024/11/10 21:10:50 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/04/28 13:12:58 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -87,7 +87,7 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
-char	*ft_substr(char *s, unsigned int start, size_t len)
+/*char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*sub;
@@ -106,4 +106,4 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		sub[i++] = s[start++];
 	sub[i] = '\0';
 	return (sub);
-}
+}*/

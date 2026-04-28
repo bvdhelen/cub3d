@@ -3,26 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/04/08 20:05:33 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/04/28 12:59:50 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 //includes => NO AÑADIDOS EN EL GIT, los define generales tampoco
-# include "../src/aux/libft/libft.h"
-# include "../src/aux/gnl/get_next_line.h"
+# include "aux/libft/libft.h"
+# include "aux/gnl/get_next_line.h"
+
+// Definir códigos de color
+# define BLACK		"\033[0;30m"
+# define RED		"\033[0;31m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define BLUE		"\033[0;34m"
+# define MAGENTA	"\033[0;35m"
+# define CYAN		"\033[0;36m"
+# define WHITE		"\033[0;37m"
+# define GREY		"\033[0;90m"
+# define RESET		"\033[0m"
 
 //estructura de imagen
 typedef struct s_imagen
 {
 	void	*img;
 	char	*addr; // img_pixels
-	int		bits per_pixel;
+	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
 }	t_imagen;
@@ -39,7 +51,7 @@ typedef struct s_data
 {
 	void		*mlx_connection;
 	void		*window;
-	t_img		imagen; //primera struct
+	t_imagen	imagen; //primera struct
 
 	//mapa
 	char		**map;
@@ -65,5 +77,8 @@ typedef struct s_data
 	double		plane_y;
 
 }	t_data;
+
+void	error_arg(void);
+int		error(char *message);
 
 #endif
