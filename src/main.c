@@ -25,8 +25,8 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		//error("incorrect file\n");
-		ft_putstr_fd("Error\nCannot open file\n", 2);
+		ft_putstr_fd(RED "Error: \n" RESET, 2);
+		ft_putstr_fd("Cannot open file\n", 2);
 		return (1);
 	}
     data = init_data();
@@ -49,5 +49,6 @@ int	main(int argc, char **argv)
 	//start_game(&data);
 	//free_game(&data);
 	free_data(data);
+	free(data);
 	return (0);
 }
