@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/04/28 13:34:32 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/02 13:44:05 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 //includes => NO AÑADIDOS EN EL GIT, los define generales tampoco
 # include "aux/libft/libft.h"
 # include "aux/gnl/get_next_line.h"
+# include "../mlx_linux/mlx.h"
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include <stdlib.h>
+# include <stdio.h>
 
 // Definir códigos de color
 # define BLACK		"\033[0;30m"
@@ -29,13 +34,17 @@
 # define GREY		"\033[0;90m"
 # define RESET		"\033[0m"
 
+// Definir el ancho y alto de la ventana
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+
 //estructura de imagen
 typedef struct s_imagen
 {
 	void	*img;
 	char	*addr; // img_pixels
 	int		bits_per_pixel;
-	int		line_lenght;
+	int		line_length;
 	int		endian;
 }	t_imagen;
 
@@ -82,9 +91,20 @@ typedef struct s_data
 void	error_arg(void);
 int		error(char *message);
 
+void 	free_data(t_data *data);
+
 char	*skip_spaces(char *str);
 int		parse_color(char *file, t_data *data);
 int		parse_texture(char *file, t_data *data);
 int		parse_elements(char *file, t_data *data);
+
+int	parse_map(t_data *data, t_list *map_lines);
+
+int		is_map_line(char *line);
+int		parse_file(int fd, t_data *data);
+
+t_data	*init_data(void);
+int		init_window(t_data *data);
+void	init_image(t_data *data, int width, int height);
 
 #endif

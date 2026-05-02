@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/02 13:24:48 by bvdhelen          #+#    #+#             */
+/*   Updated: 2026/05/02 13:24:48 by bvdhelen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	int	fd;
-	char *file;
+	t_data	*data;
+	int		fd;
 
 	if (argc != 2)
 	{
@@ -14,26 +25,29 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		error("incorrect file\n");
+		//error("incorrect file\n");
+		ft_putstr_fd("Error\nCannot open file\n", 2);
 		return (1);
 	}
-	file = get_next_line(fd);
-	while (file)
+    data = init_data();
+	if (!data)
 	{
-		if (parse_elements(file, &data) == -1)
-		{
-			error("misconfiguration file\n");
-			close(fd);
-			return (1);
-		}
-		free(file);
-		file = get_next_line(fd);
+		close(fd);
+		return (1);
 	}
-	printf("hola\n");
-    //init(&data);
-	//parse(argv[1], &data);
+	if (parse_file(fd, data) == -1)
+	{
+		close(fd);
+		free_data(data);
+		free(data);
+		return (1);
+	}
+	close(fd);
+	printf("Mapa parseado correctamente:\n");
+	for (int i = 0; data->map[i]; i++)
+		printf("%s\n", data->map[i]);
 	//start_game(&data);
 	//free_game(&data);
-	close(fd);
+	free_data(data);
 	return (0);
 }

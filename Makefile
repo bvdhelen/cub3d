@@ -35,8 +35,11 @@ RESET = \033[0m
 # Archivos fuente y archivos objeto
 SRC =	src/main.c \
 		src/utils/error.c \
+		src/utils/free.c \
 		src/parse/parse.c \
-		#src/init/init.c \
+		src/parse/parse_elements.c \
+		src/parse/parse_map.c \
+		src/init/init.c \
 
 OBJ = $(SRC:.c=.o)
 

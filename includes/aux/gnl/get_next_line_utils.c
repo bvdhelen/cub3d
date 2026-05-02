@@ -6,13 +6,13 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 19:46:23 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/04/28 13:38:00 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/02 13:47:40 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strchr(const char *s, int c)
+/*char	*ft_strchr(const char *s, int c)
 {
 	unsigned int	i;
 
@@ -28,7 +28,7 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == (char)c)
 		return ((char *)&s[i]);
 	return (NULL);
-}
+}*/
 
 /*size_t	ft_strlen(const char *s)
 {
