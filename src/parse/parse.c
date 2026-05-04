@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 18:01:41 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 19:38:50 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,6 @@ int	parse_file(int fd, t_data *data)
 	result = parse_map(data, map_lines);
 	ft_lstclear(&map_lines, free);
 	if (result == -1)
-		return (error("Invalid map\n"));
+		return (-1);
 	return (0);
 }

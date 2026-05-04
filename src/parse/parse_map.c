@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:45:50 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/02 13:34:39 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/04 19:41:29 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,20 @@ static void	set_player_dir(t_data *data, char dir)
 	}
 }
 
+
+// DEBUG HELPER
+static void	print_map(t_data *data)
+{
+	int i = 0;
+
+	printf("MAP (%d x %d):\n", data->map_width, data->map_height);
+	while (data->map[i])
+	{
+		printf("[%s]\n", data->map[i]);
+		i++;
+	}
+}
+
 /*
  * Función principal parse_map:
  * 1. Construye la matriz data->map a partir de la lista map_lines.
@@ -236,19 +250,20 @@ int	parse_map(t_data *data, t_list *map_lines)
     }
 	// Validación 1: caracteres inválidos
 	if (invalid_chars(data))
-		return (-1);
+		return(error("Invalid map\tInvalid chars\n"));
 	// Validación 2: un solo jugador
 	if (count_player(data, &px, &py) != 1)
-		return (-1);
+		return(error("Invalid map\tInvalid number of players\n"));
 	// !!Guardamos la posición del jugador y lo sustituimos por '0' (para que se pueda caminar)
 	player = data->map[py][px];
 	data->map[py][px] = '0';
 	// Validación 3: mapa cerrado
 	if (!check_closed(data, px, py))
-		return (-1);
+		return(error("Invalid map\tMap not closed\n"));
 	// !! Posición EXACTA del jugador en pix (centro de la celda)
 	data->pos_x = px + 0.5;
 	data->pos_y = py + 0.5;
 	set_player_dir(data, player);
+	print_map(data);
 	return (0);
 }

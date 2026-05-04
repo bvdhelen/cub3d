@@ -60,12 +60,3 @@ int	main(int argc, char **argv)
 	free_all(data);
 	return (0);
 }
-
-
-// printf("Mapa parseado correctamente:\n");
-// 	int	i = 0;
-// 	while (data->map[i])
-// 	{
-// 		printf("%s\n", data->map[i]);
-// 		i++;
-// 	}

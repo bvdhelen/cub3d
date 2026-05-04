@@ -1,5 +1,5 @@
 # Nombre del archivo de la biblioteca
-NAME = cub3d
+NAME = cub3D
 
 # Compilador y banderas de compilación
 CC = cc

@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 18:07:50 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 19:42:45 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	init_window(t_data *data)
     data->mlx_connection = mlx_init();
 	if (!data->mlx_connection)
 		return (0);
-	data->window = mlx_new_window(data->mlx_connection, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	data->window = mlx_new_window(data->mlx_connection, WIN_WIDTH, WIN_HEIGHT, "cub3D");
 	if (!data->window)
 	{
 		mlx_destroy_display(data->mlx_connection);
