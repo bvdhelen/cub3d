@@ -35,3 +35,6 @@ las 2 -> open fd
     - Abrir y cerrar ventana sin leaks
 
 
+* Cambiar el Makeile apra que los .o se guarden en una carpeta todos, para que se borre la carpeta cuando haces clean
+* Pasar norminette a todo el parseo
+* Comprobar con diferentes archivos y hacer pruebas de fallos y leaks

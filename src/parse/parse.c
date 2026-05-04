@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/02 13:32:41 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:01:41 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ int	is_map_line(char *line)
 	while (line[i] && ft_isspace(line[i]))
 		i++;
 	return (line[i] == '1' || line[i] == '0');
+}
+
+static void	clean_gnl(int fd)
+{
+	char *tmp;
+
+	tmp = get_next_line(fd);
+	while (tmp)
+	{
+		free(tmp);
+		tmp = get_next_line(fd);
+	}
 }
 
 int	parse_file(int fd, t_data *data)
@@ -41,6 +53,7 @@ int	parse_file(int fd, t_data *data)
 			else if (parse_elements(file, data) == -1)
             {
                 free(file);
+				clean_gnl(fd);
 				return (error("Invalid element\n"));
             }
 			if (!map_started)
