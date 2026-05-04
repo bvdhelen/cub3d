@@ -40,6 +40,7 @@ SRC =	src/main.c \
 		src/parse/parse_elements.c \
 		src/parse/parse_map.c \
 		src/init/init.c \
+		src/hooks/hooks.c \
 
 OBJ = $(SRC:.c=.o)
 

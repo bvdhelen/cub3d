@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/02 13:44:05 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:20:34 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,14 @@ typedef struct s_data
 void	error_arg(void);
 int		error(char *message);
 
-void 	free_data(t_data *data);
+void 	free_all(t_data *data);
 
 char	*skip_spaces(char *str);
 int		parse_color(char *file, t_data *data);
 int		parse_texture(char *file, t_data *data);
 int		parse_elements(char *file, t_data *data);
 
-int	parse_map(t_data *data, t_list *map_lines);
+int		parse_map(t_data *data, t_list *map_lines);
 
 int		is_map_line(char *line);
 int		parse_file(int fd, t_data *data);
@@ -106,5 +106,9 @@ int		parse_file(int fd, t_data *data);
 t_data	*init_data(void);
 int		init_window(t_data *data);
 void	init_image(t_data *data, int width, int height);
+
+int		handle_key(int key, t_data *data);
+int		handle_event(t_data *data);
+
 
 #endif

@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/02 13:28:42 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/04 18:07:50 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*
-    init_data      → malloc + defaults
-    init_window    → mlx_init + ventana
-    init_image     → imagen principal
-*/
 
 // void	set_default_values(t_data *data)
 // {
@@ -37,6 +31,11 @@
 // 	data->pos_y = -1;
 // }
 
+/*
+    init_data      → malloc + defaults
+    init_window    → mlx_init + ventana
+    init_image     → imagen principal
+*/
 t_data	*init_data(void)
 {
     t_data  *data;

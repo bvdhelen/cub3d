@@ -35,20 +35,34 @@ int	main(int argc, char **argv)
 		close(fd);
 		return (1);
 	}
+	if (!init_window(data))
+		return (1);
+	init_image(data, WIN_WIDTH, WIN_HEIGHT);
 	if (parse_file(fd, data) == -1)
 	{
 		close(fd);
-		free_data(data);
-		free(data);
+		free_all(data);
 		return (1);
 	}
+	//Aqui hace cosas
+	mlx_put_image_to_window(data->mlx_connection, data->window,
+		data->imagen.img, 0, 0);
+	//display_instructions(data);
+	mlx_key_hook(data->window, handle_key, data);
+	mlx_hook(data->window, 17, 0, handle_event, data);
+	mlx_loop(data->mlx_connection);
+	
 	close(fd);
+
 	printf("Mapa parseado correctamente:\n");
-	for (int i = 0; data->map[i]; i++)
+	int	i = 0;
+	while (data->map[i])
+	{
 		printf("%s\n", data->map[i]);
+		i++;
+	}
 	//start_game(&data);
 	//free_game(&data);
-	free_data(data);
-	free(data);
+	free_all(data);
 	return (0);
 }
