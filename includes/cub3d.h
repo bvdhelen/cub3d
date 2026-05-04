@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/04 18:20:34 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 19:02:28 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <X11/X.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <signal.h>
 
 // Definir códigos de color
 # define BLACK		"\033[0;30m"
@@ -37,6 +38,9 @@
 // Definir el ancho y alto de la ventana
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+
+// Definir el tamaño de celda
+#define TILE_SIZE 22
 
 //estructura de imagen
 typedef struct s_imagen
@@ -109,6 +113,10 @@ void	init_image(t_data *data, int width, int height);
 
 int		handle_key(int key, t_data *data);
 int		handle_event(t_data *data);
+
+void	draw_map(t_data *data);
+void	draw_square(t_data *data, int x, int y, int color);
+void	put_pixel(t_data *data, int x, int y, int color);
 
 
 #endif

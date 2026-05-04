@@ -35,16 +35,17 @@ int	main(int argc, char **argv)
 		close(fd);
 		return (1);
 	}
-	if (!init_window(data))
-		return (1);
-	init_image(data, WIN_WIDTH, WIN_HEIGHT);
 	if (parse_file(fd, data) == -1)
 	{
 		close(fd);
 		free_all(data);
 		return (1);
 	}
+	if (!init_window(data))
+		return (1);
+	init_image(data, WIN_WIDTH, WIN_HEIGHT);
 	//Aqui hace cosas
+	draw_map(data);
 	mlx_put_image_to_window(data->mlx_connection, data->window,
 		data->imagen.img, 0, 0);
 	//display_instructions(data);
@@ -54,15 +55,17 @@ int	main(int argc, char **argv)
 	
 	close(fd);
 
-	printf("Mapa parseado correctamente:\n");
-	int	i = 0;
-	while (data->map[i])
-	{
-		printf("%s\n", data->map[i]);
-		i++;
-	}
 	//start_game(&data);
 	//free_game(&data);
 	free_all(data);
 	return (0);
 }
+
+
+// printf("Mapa parseado correctamente:\n");
+// 	int	i = 0;
+// 	while (data->map[i])
+// 	{
+// 		printf("%s\n", data->map[i]);
+// 		i++;
+// 	}

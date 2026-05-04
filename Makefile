@@ -36,6 +36,7 @@ RESET = \033[0m
 SRC =	src/main.c \
 		src/utils/error.c \
 		src/utils/free.c \
+		src/utils/minimap.c \
 		src/parse/parse.c \
 		src/parse/parse_elements.c \
 		src/parse/parse_map.c \
