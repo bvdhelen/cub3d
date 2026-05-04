@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 19:38:50 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 19:51:11 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parse_file(int fd, t_data *data)
 			{
 				free(file);
 				file = get_next_line(fd);
-				continue;
+				//continue;
 			}
 		}
 		ft_lstadd_back(&map_lines, ft_lstnew(file));

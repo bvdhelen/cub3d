@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 18:37:06 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:37:12 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void free_all(t_data *data)
 
 	if (!data)
 		return ;
-	// free mapa
 	if (data->map)
 	{
 		i = 0;
@@ -28,18 +27,14 @@ void free_all(t_data *data)
 	}
 	// free texturas???
 		// Cuando carguemos las texturas, las liberaremos aquí
-	// free imagen
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
-	// free window
 	if (data->window)
 		mlx_destroy_window(data->mlx_connection, data->window);
-	// free mlx_connection
 	if (data->mlx_connection)
 	{
 		mlx_destroy_display(data->mlx_connection);
 		free(data->mlx_connection);
 	}
-	// free data
 	free(data);
 }

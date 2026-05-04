@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	}
 	if (!init_window(data))
 		return (1);
-	init_image(data, WIN_WIDTH, WIN_HEIGHT);
+	init_image(data);
 	//Aqui hace cosas
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx_connection, data->window,
@@ -53,10 +53,9 @@ int	main(int argc, char **argv)
 	mlx_hook(data->window, 17, 0, handle_event, data);
 	mlx_loop(data->mlx_connection);
 	
-	close(fd);
-
 	//start_game(&data);
 	//free_game(&data);
+	close(fd);
 	free_all(data);
 	return (0);
 }

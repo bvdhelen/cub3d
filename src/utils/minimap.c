@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 18:36:01 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/04 19:05:15 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:34:26 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,10 @@ void	draw_map(t_data *data)
 				draw_square(data, x * TILE_SIZE, y * TILE_SIZE, 0x00FFFFFF);
 			else if (cell == '0')
 				draw_square(data, x * TILE_SIZE, y * TILE_SIZE, 0x00000000);
-			// else if (cell == 'N' || cell == 'S' || cell == 'E' || cell == 'W')
-			// 	draw_square(data, x * TILE_SIZE, y * TILE_SIZE, 0x000000FF);
 			x++;
 		}
 		y++;
 	}
-    // Dibujar al jugador con su posición
     draw_square(data, (int)data->pos_x * TILE_SIZE,
         (int)data->pos_y * TILE_SIZE, 0x000000FF);
 }

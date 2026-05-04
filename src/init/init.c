@@ -6,30 +6,11 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 19:42:45 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:18:14 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	set_default_values(t_data *data)
-// {
-// 	data->map = NULL;
-// 	data->map_width = 0;
-// 	data->map_height = 0;
-
-// 	data->mlx_connection = NULL;
-// 	data->window = NULL;
-
-//     data->imagen.img = NULL;
-// 	data->imagen.addr = NULL;
-// 	data->imagen.bits_per_pixel = 0;
-// 	data->imagen.line_length = 0;
-// 	data->imagen.endian = 0;
-    
-// 	data->pos_x = -1;
-// 	data->pos_y = -1;
-// }
 
 /*
     init_data      → malloc + defaults
@@ -46,10 +27,8 @@ t_data	*init_data(void)
 		error("malloc failed\n");
         return (NULL);
 	}
-		//"Error al reservar memoria para t_data.\n"
     ft_bzero(data, sizeof(t_data));
     //set_default_values(data);
-	//free(data);
 	return (data);
 }
 
@@ -68,23 +47,23 @@ int	init_window(t_data *data)
 	return (1);
 }
 
-void	init_image(t_data *data, int width, int height)
+void	init_image(t_data *data)
 {
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
-	data->imagen.img = mlx_new_image(data->mlx_connection, width, height);
+	data->imagen.img = mlx_new_image(data->mlx_connection, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->imagen.img)
 	{
+		free_all(data);
 		error("imagen init failed\n");
 		return ;
-		//free_all(data);
 	}
 	data->imagen.addr = mlx_get_data_addr(data->imagen.img,
 			&data->imagen.bits_per_pixel, &data->imagen.line_length, &data->imagen.endian);
 	if (!data->imagen.addr)
 	{
+		free_all(data);
 		error("imagen pixel address failed\n");
 		return ;
-		//free_all(data);
 	}
 }

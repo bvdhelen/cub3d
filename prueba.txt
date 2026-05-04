@@ -2,11 +2,11 @@
 ¡¡HAY QUE VER QUE ES EL ALGORITMO DE CÁLCULO DE DISTACIA EN UN MAPA!!
 ¡¡DDA (Diferential Analysing Analist)!!
 
-ELE -> parsear mapa parse_map
-    -> corregir makefile
-PAU -> parsear elementos parse_elements
-    -> añadir libft y gnl a src/aux
-las 2 -> open fd
+ELE -> norminette & checks parse_map
+    -> Revisar esquinas del mapa
+    -> Probar Still Reachable cuando cerramos con CTRL+C
+PAU -> norminette & checks parse_elements
+    -> Cambiar el Makefile para que los .o se guarden en una carpeta todos, para que se borre la carpeta cuando haces clean
     
 1. Leer el archivo (2)
 
@@ -20,21 +20,16 @@ las 2 -> open fd
 3. Validar:
 
     - Solo caracteres permitidos (2)
-    - Un solo jugador ¿E?
+    - Un solo jugador (E)
     - Mapa cerrado (E)
     - RGB válidos (P)
     - Rutas válidas (+ ADELANTE)
 
 4. Inicialización gráfica (MiniLibX)
-    - añadir mlx lib afuera
-    - mlx_init()
-    - mlx_new_window()
-    - Crear imagen
-    - Hook de teclado
-    - Hook de cerrar ventana
-    - Abrir y cerrar ventana sin leaks
-
-
-* Cambiar el Makeile apra que los .o se guarden en una carpeta todos, para que se borre la carpeta cuando haces clean
-* Pasar norminette a todo el parseo
-* Comprobar con diferentes archivos y hacer pruebas de fallos y leaks
+    [x] añadir mlx lib afuera 
+    [x] mlx_init()
+    [x] mlx_new_window()
+    [x] Crear imagen
+    [ ] Hook de teclado
+    [x] Hook de cerrar ventana y ESC
+    [ ] Abrir y cerrar ventana sin leaks

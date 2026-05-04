@@ -58,7 +58,7 @@ $(NAME): header $(OBJ)
 		-L$(GNL_DIR) -l:get_next_line.a \
 		$(MLX)
 	@echo
-	@echo "$(GREEN)<<< cub3d compiled >>>$(RESET)"
+	@echo "$(GREEN)<<< cub3D compiled >>>$(RESET)"
 	@echo
 
 # Regla para crear los archivos objeto (.o)

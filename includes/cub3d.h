@@ -6,14 +6,13 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/04 19:02:28 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:07:15 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-//includes => NO AÑADIDOS EN EL GIT, los define generales tampoco
 # include "aux/libft/libft.h"
 # include "aux/gnl/get_next_line.h"
 # include "../mlx_linux/mlx.h"
@@ -109,7 +108,7 @@ int		parse_file(int fd, t_data *data);
 
 t_data	*init_data(void);
 int		init_window(t_data *data);
-void	init_image(t_data *data, int width, int height);
+void	init_image(t_data *data);
 
 int		handle_key(int key, t_data *data);
 int		handle_event(t_data *data);

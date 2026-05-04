@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:45:50 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 19:41:29 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/04 20:41:31 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,17 +193,17 @@ static void	set_player_dir(t_data *data, char dir)
 
 
 // DEBUG HELPER
-static void	print_map(t_data *data)
-{
-	int i = 0;
+// static void	print_map(t_data *data)
+// {
+// 	int i = 0;
 
-	printf("MAP (%d x %d):\n", data->map_width, data->map_height);
-	while (data->map[i])
-	{
-		printf("[%s]\n", data->map[i]);
-		i++;
-	}
-}
+// 	printf("MAP (%d x %d):\n", data->map_width, data->map_height);
+// 	while (data->map[i])
+// 	{
+// 		printf("[%s]\n", data->map[i]);
+// 		i++;
+// 	}
+// }
 
 /*
  * Función principal parse_map:
@@ -264,6 +264,6 @@ int	parse_map(t_data *data, t_list *map_lines)
 	data->pos_x = px + 0.5;
 	data->pos_y = py + 0.5;
 	set_player_dir(data, player);
-	print_map(data);
+	//print_map(data);
 	return (0);
 }

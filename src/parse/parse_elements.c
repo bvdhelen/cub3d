@@ -170,4 +170,5 @@ int	parse_elements(char *file, t_data *data)
 
 	//mapa no puede ser encontrado antes que todos los elementos
 	//preguntar ¿si no define algun elemento sale por error o se le asigna uno default?
+	// SALIR SI FALTA ALGUNO
 }
