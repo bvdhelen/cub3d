@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 19:51:11 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/17 13:52:44 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_map_line(char *line)
 
 static void	clean_gnl(int fd)
 {
-	char *tmp;
+	char	*tmp;
 
 	tmp = get_next_line(fd);
 	while (tmp)
@@ -51,16 +51,15 @@ int	parse_file(int fd, t_data *data)
 			if (is_map_line(file))
 				map_started = 1;
 			else if (parse_elements(file, data) == -1)
-            {
-                free(file);
+			{
+				free(file);
 				clean_gnl(fd);
 				return (error("Invalid element\n"));
-            }
+			}
 			if (!map_started)
 			{
 				free(file);
 				file = get_next_line(fd);
-				//continue;
 			}
 		}
 		ft_lstadd_back(&map_lines, ft_lstnew(file));

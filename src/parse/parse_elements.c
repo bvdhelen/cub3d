@@ -59,23 +59,21 @@ int	parse_color(char *file, t_data *data)
 	info = skip_spaces(file + 1);
 	type = file[0];
 	i = 0;
-
-	while (info[i])//control de errores:fuera !(' ', ',', 0-9)
+	while (info[i]) //control de errores:fuera !(' ', ',', 0-9)
 	{
-		if (!ft_isspace(info[i]) && info[i] != ',' && !(info[i] >= '0' && info[i] <= '9'))
+		if (!ft_isspace(info[i]) && info[i] != ','
+			&& !(info[i] >= '0' && info[i] <= '9'))
 			return (-1);
 		i++;
 	}
-
 	rgb = ft_split(info, ',');//separar
-	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])//3 valores
+	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3]) //3 valores
 	{
 		ft_freedp(rgb);
 		return (-1);
 	}
-
 	i = 0;
-	while (rgb[i])//rango entre 0-255
+	while (rgb[i]) //rango entre 0-255
 	{
 		if (ft_atoi(rgb[i]) < 0 || ft_atoi(rgb[i]) > 255)
 		{
@@ -84,7 +82,6 @@ int	parse_color(char *file, t_data *data)
 		}
 		i++;
 	}
-
 	if (type == 'F')
 	{
 		data->floor_color[0] = ft_atoi(rgb[0]);
@@ -109,16 +106,14 @@ int	parse_texture(char *file, t_data *data)
 	int		i;
 
 	info = skip_spaces(file + 2);
-	type = file[0];//ya valido el siguiente caracter y el espacio fuera de esta funcion
+	type = file[0];
+	//ya valido el siguiente caracter y el espacio fuera de esta funcion
 	i = ft_strlen(info);
-
 	if (i < 4 || ft_strncmp(info + i - 4, ".xpm", 4) != 0)
 		return (-1);
-
-	path = ft_strdup(info);//extraer path
-	if (!path)//validar path
+	path = ft_strdup(info); //extraer path
+	if (!path) //validar path
 		return (-1);
-
 	if (type == 'N')
 	{
 		if (data->north.path)
@@ -151,7 +146,7 @@ int	parse_elements(char *file, t_data *data)
 	char	*start;
 
 	start = skip_spaces(file);
-	if (*start == '\0' || *start == '\n')//saltar líneas vacías
+	if (*start == '\0' || *start == '\n') //saltar líneas vacías
 		return (0);
 	if (ft_strncmp(start, "F ", 2) == 0 || ft_strncmp(start, "C ", 2) == 0)
 	{
@@ -159,7 +154,10 @@ int	parse_elements(char *file, t_data *data)
 		// 	return (-1);
 		return (parse_color(start, data));
 	}
-	else if (ft_strncmp(start, "NO ", 3) == 0 || ft_strncmp(start, "SO ", 3) == 0 || ft_strncmp(start, "EA ", 3) == 0 || ft_strncmp(start, "WE ", 3) == 0)
+	else if (ft_strncmp(start, "NO ", 3) == 0
+		|| ft_strncmp(start, "SO ", 3) == 0
+		|| ft_strncmp(start, "EA ", 3) == 0
+		|| ft_strncmp(start, "WE ", 3) == 0)
 	{
 		// if (parse_texture(start, data) == -1)
 		// 	return (-1);
@@ -167,8 +165,7 @@ int	parse_elements(char *file, t_data *data)
 	}
 	else//si es cualquier otra cosa error
 		return (-1);//error
-
 	//mapa no puede ser encontrado antes que todos los elementos
-	//preguntar ¿si no define algun elemento sale por error o se le asigna uno default?
+	//¿si no define algun elemento sale por error o se le asigna uno default?
 	// SALIR SI FALTA ALGUNO
 }
