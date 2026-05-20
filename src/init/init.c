@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 20:18:14 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/20 17:23:09 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,14 @@ void	init_image(t_data *data)
 		error("imagen pixel address failed\n");
 		return ;
 	}
+}
+
+void	init_set(t_data *data)//ketchup
+{
+	data->floor_set = 0;
+	data->ceiling_set = 0;
+	data->north_set = 0;
+	data->south_set = 0;
+	data->east_set = 0;
+	data->west_set = 0;
 }

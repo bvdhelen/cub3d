@@ -20,6 +20,9 @@ GNL_DIR = ./includes/aux/gnl
 LIBFT = -L$(LIBFT_DIR) -lft
 GNL = -L$(GNL_DIR) -l:get_next_line.a
 
+# Carpeta para objetos
+OBJ_DIR = obj
+
 # Definir códigos de color
 BLACK = \033[0;30m
 RED = \033[0;31m
@@ -40,10 +43,11 @@ SRC =	src/main.c \
 		src/parse/parse.c \
 		src/parse/parse_elements.c \
 		src/parse/parse_map.c \
+		src/parse/parse_map2.c \
 		src/init/init.c \
 		src/hooks/hooks.c \
 
-OBJ = $(SRC:.c=.o)
+OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
 
 # Regla principal que lo compila todo
 all: $(NAME)
@@ -65,12 +69,13 @@ $(NAME): header $(OBJ)
 # -c indica que se debe commpilar el código sin enlazar (crear solo el .o)
 # $< representa el archivo de entrada (el .c que se está compilando)
 # -o $@ especifica el nombre del archivo de salida que se está generando
-%.o: %.c
+$(OBJ_DIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # Eliminar todos los archivos .o y .a
 clean:
-	@rm -f $(OBJ)
+	@rm -rf $(OBJ_DIR)
 	@$(MAKE) clean -C $(LIBFT_DIR) --no-print-directory
 	@$(MAKE) clean -C $(GNL_DIR) --no-print-directory
 	@echo
@@ -88,13 +93,14 @@ re: fclean all
 
 # ASCII Art
 header:
+
 	@echo
-	@echo "$(YELLOW)              __   _____     __                                     __ ";
-	@echo "$(YELLOW)  _______  __/ /_ |__  /____/ /   ____  _________  __  _____  _____/ /_";
-	@echo "$(YELLOW) / ___/ / / / __ \ /_ </ __  /   / __ \/ ___/ __ \/ / / / _ \/ ___/ __/";
-	@echo "$(YELLOW)/ /__/ /_/ / /_/ /__/ / /_/ /   / /_/ / /  / /_/ / /_/ /  __/ /__/ /_  ";
-	@echo "$(YELLOW)\___/\__,_/_.___/____/\__,_/   / .___/_/   \____/\__, /\___/\___/\__/  ";
-	@echo "$(YELLOW)                              /_/               /____/                ";
+	@echo "$(YELLOW)              __   _____ ____                        _           __ ";
+	@echo "$(YELLOW)  ____,__  _,/ /_ |__  // __ \   ____  ____,____    (_)__  ____,/ /_";
+	@echo "$(YELLOW) / ___/ / / / __ \ /_ </ / / /  / __ \/ ___/ __ \  / / _ \/ ___/ __/";
+	@echo "$(YELLOW)/ /__/ /_/ / /_/ /__/ / /_/ /  / /_/ / /  / /_/ / / /  __/ /__/ /_  ";
+	@echo "$(YELLOW)\___/\__,_/_.___/____/_____/  / .___/_/   \____/_/ /\___/\___/\__/  ";
+	@echo "$(YELLOW)                             /_/              /___/                 ";
 	@echo "$(GREY)                      by ptrapero & eldiaz-c                         ";
 	@echo " $(RESET)"
 	@echo

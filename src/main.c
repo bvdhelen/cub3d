@@ -16,12 +16,22 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 	int		fd;
+	int		i;//COMPROBAR LÍNEA 26-34 ketchup
 
 	if (argc != 2)
 	{
 		error_arg();
 		return (1);
 	}
+	//HACER COMPROBACIÓN DE SI NO ES .CUB NO ENTRAR:ketchup
+	i = ft_strlen(argv[1]);
+	if (i < 4 || ft_strncmp(argv[1] + i - 4, ".cub", 4) != 0)//ver bien porque es diferente a la de parse_elements
+	{
+		ft_putstr_fd(RED "Error: \n" RESET, 2);
+		ft_putstr_fd("File not valid: insert 'map.cub'\n", 2);//preguntar a elena
+		return (1);
+	}
+	//COMPROBAR LO DE ARRIBA
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -35,6 +45,7 @@ int	main(int argc, char **argv)
 		close(fd);
 		return (1);
 	}
+	init_set(data);//ketchup
 	if (parse_file(fd, data) == -1)
 	{
 		close(fd);

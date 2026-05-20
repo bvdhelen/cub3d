@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:45:50 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/17 13:40:32 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/20 16:54:14 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	count_lines(t_list *lst)
+int	count_lines(t_list *lst)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ static int	count_lines(t_list *lst)
 	return (i);
 }
 
-static char	*trim_newline(char *line)
+char	*trim_newline(char *line)
 {
 	int	len;
 
@@ -35,7 +35,7 @@ static char	*trim_newline(char *line)
 	return (line);
 }
 
-static int	get_max_width(t_data *data)
+int	get_max_width(t_data *data)
 {
 	int	i;
 	int	max;
@@ -55,7 +55,7 @@ static int	get_max_width(t_data *data)
  * Cuenta cuántos jugadores hay y guarda la posición del primero.
  * Retorna el número de jugadores encontrados.
  */
-static int	count_player(t_data *data, int *px, int *py)
+int	count_player(t_data *data, int *px, int *py)
 {
 	int	i;
 	int	j;
@@ -83,7 +83,7 @@ static int	count_player(t_data *data, int *px, int *py)
  * Verifica que todos los caracteres del mapa sean válidos.
  * Retorna 1 si encuentra algún carácter inválido, 0 si está bien.
  */
-static int	invalid_chars(t_data *data)
+int	invalid_chars(t_data *data)
 {
 	int	i;
 	int	j;

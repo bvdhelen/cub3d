@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 19:23:04 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/04/13 21:10:59 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/05/20 17:29:32 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*ft_memchr(const void *s, int c, size_t n);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 int		ft_atoi(const char *nptr);
+int		ft_atoi_overflow(const char *nptr, int *overflow);
 void	*ft_calloc(size_t nmemb, size_t size);
 char	*ft_strdup(const char *s);
 void	ft_freedp(char **matrix);

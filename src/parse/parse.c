@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/17 13:52:44 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/20 17:22:40 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	parse_file(int fd, t_data *data)
 	file = get_next_line(fd);
 	while (file)
 	{
+		charnull_gnl(file);//ketchup revisar que con esto no se rompe la parte de elena, si no llamarla desde parse_elements
 		if (!map_started)
 		{
 			if (is_map_line(file))
@@ -60,11 +61,14 @@ int	parse_file(int fd, t_data *data)
 			{
 				free(file);
 				file = get_next_line(fd);
+				continue;//ketchup
 			}
 		}
 		ft_lstadd_back(&map_lines, ft_lstnew(file));
 		file = get_next_line(fd);
 	}
+	if (!data->floor_set || !data->ceiling_set || !data->north_set || !data->south_set || !data->east_set || !data->west_set)
+		return (error("Mising elements\n"));//ketchup
 	if (!map_started)
 		return (error("No map found\n"));
 	result = parse_map(data, map_lines);

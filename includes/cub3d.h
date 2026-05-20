@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/04 20:07:15 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/20 17:27:21 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,14 @@ typedef struct s_data
 	t_texture	east;
 	t_texture	west;
 
+	//estado set
+	int			floor_set;
+	int			ceiling_set;
+	int			north_set;
+	int			south_set;
+	int			east_set;
+	int			west_set;
+
     // Jugador: posición, dirección hacia donde mira, campo de visión
 	double		pos_x;
 	double		pos_y;
@@ -95,6 +103,14 @@ void	error_arg(void);
 int		error(char *message);
 
 void 	free_all(t_data *data);
+void	charnull_gnl(char *s);//ketchup no se donde ponerla
+
+//ketchup -> añadido de parse_map2.c
+int		count_lines(t_list *lst);
+char	*trim_newline(char *line);
+int		get_max_width(t_data *data);
+int		count_player(t_data *data, int *px, int *py);
+int		invalid_chars(t_data *data);
 
 char	*skip_spaces(char *str);
 int		parse_color(char *file, t_data *data);
@@ -109,6 +125,7 @@ int		parse_file(int fd, t_data *data);
 t_data	*init_data(void);
 int		init_window(t_data *data);
 void	init_image(t_data *data);
+void	init_set(t_data *data);//ketchup
 
 int		handle_key(int key, t_data *data);
 int		handle_event(t_data *data);
@@ -116,6 +133,5 @@ int		handle_event(t_data *data);
 void	draw_map(t_data *data);
 void	draw_square(t_data *data, int x, int y, int color);
 void	put_pixel(t_data *data, int x, int y, int color);
-
 
 #endif
