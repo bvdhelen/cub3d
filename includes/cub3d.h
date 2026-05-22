@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/20 17:27:21 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/05/22 12:27:36 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,14 @@
 
 // Definir el tamaño de celda
 #define TILE_SIZE 22
+
+//estructura para flood fill
+typedef struct s_flood
+{
+	char	**map;
+	int		w;
+	int		h;
+}	t_flood;
 
 //estructura de imagen
 typedef struct s_imagen
@@ -105,19 +113,16 @@ int		error(char *message);
 void 	free_all(t_data *data);
 void	charnull_gnl(char *s);//ketchup no se donde ponerla
 
-//ketchup -> añadido de parse_map2.c
-int		count_lines(t_list *lst);
-char	*trim_newline(char *line);
-int		get_max_width(t_data *data);
-int		count_player(t_data *data, int *px, int *py);
-int		invalid_chars(t_data *data);
-
 char	*skip_spaces(char *str);
 int		parse_color(char *file, t_data *data);
 int		parse_texture(char *file, t_data *data);
 int		parse_elements(char *file, t_data *data);
 
-int		parse_map(t_data *data, t_list *map_lines);
+int	check_closed(t_data *data, int px, int py);
+int	count_player(t_data *data, int *px, int *py);
+int	invalid_chars(t_data *data);
+int	build_map_from_list(t_data *data, t_list *map_lines);
+int	parse_map(t_data *data, t_list *map_lines);
 
 int		is_map_line(char *line);
 int		parse_file(int fd, t_data *data);

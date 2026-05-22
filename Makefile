@@ -41,9 +41,10 @@ SRC =	src/main.c \
 		src/utils/free.c \
 		src/utils/minimap.c \
 		src/parse/parse.c \
-		src/parse/parse_elements.c \
 		src/parse/parse_map.c \
-		src/parse/parse_map2.c \
+		src/parse/parse_elements.c \
+		src/parse/map_utils1.c \
+		src/parse/map_utils2.c \
 		src/init/init.c \
 		src/hooks/hooks.c \
 

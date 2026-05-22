@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/04 20:37:12 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/05/22 11:47:28 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,14 @@ void free_all(t_data *data)
 			free(data->map[i++]);
 		free(data->map);
 	}
-	// free texturas???
-		// Cuando carguemos las texturas, las liberaremos aquí
+	if (data->north.path)
+		free(data->north.path);
+	if (data->south.path)
+		free(data->south.path);
+	if (data->east.path)
+		free(data->east.path);
+	if (data->west.path)
+		free(data->west.path);
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
 	if (data->window)
