@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/22 12:27:36 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/25 01:15:40 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ void	error_arg(void);
 int		error(char *message);
 
 void 	free_all(t_data *data);
-void	charnull_gnl(char *s);//ketchup no se donde ponerla
+void	charnull_gnl(char *s);
+char	*skip_spaces(char *str);
 
 char	*skip_spaces(char *str);
 int		parse_color(char *file, t_data *data);

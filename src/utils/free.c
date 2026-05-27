@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/22 11:47:28 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:55:45 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_textures_addr(t_data *data)
+{
+	if (data->north.addr)
+		free(data->north.addr);
+	if (data->south.addr)
+		free(data->south.addr);
+	if (data->east.addr)
+		free(data->east.addr);
+	if (data->west.addr)
+		free(data->west.addr);
+}
 
 void free_all(t_data *data)
 {
@@ -25,14 +37,15 @@ void free_all(t_data *data)
 			free(data->map[i++]);
 		free(data->map);
 	}
-	if (data->north.path)
-		free(data->north.path);
-	if (data->south.path)
-		free(data->south.path);
-	if (data->east.path)
-		free(data->east.path);
-	if (data->west.path)
-		free(data->west.path);
+	// if (data->north.path)
+	// 	free(data->north.path);
+	// if (data->south.path)
+	// 	free(data->south.path);
+	// if (data->east.path)
+	// 	free(data->east.path);
+	// if (data->west.path)
+	// 	free(data->west.path);
+	free_textures_addr(data);
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
 	if (data->window)

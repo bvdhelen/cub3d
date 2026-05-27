@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/22 12:16:12 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/05/27 12:20:01 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,16 @@ static int	process_line(char *line, t_data *data, int *map_started)
 	return (1);
 }
 
+static void	borrar_solo_comprueba(t_data *data)
+{
+	printf("N -> '%s'\n", data->north.addr);
+	printf("S -> '%s'\n", data->south.addr);
+	printf("E -> '%s'\n", data->east.addr);
+	printf("W -> '%s'\n", data->west.addr);
+	printf("F -> '%i' '%i' '%i'\n", data->floor_color[0], data->floor_color[1], data->floor_color[2]);
+	printf("C -> '%i' '%i' '%i'\n", data->ceiling_color[0], data->ceiling_color[1], data->ceiling_color[2]);
+}
+
 static int	read_lines(int fd, t_data *data, t_list **map_lines,
 		int *map_started)
 {
@@ -69,8 +79,6 @@ static int	read_lines(int fd, t_data *data, t_list **map_lines,
 	while (file)
 	{
 		charnull_gnl(file);
-		//ketchup revisar no se rompe la parte de elena,
-			//si no call desde parse_elements
 		ret = process_line(file, data, map_started);
 		if (ret == -1)
 		{
@@ -84,6 +92,7 @@ static int	read_lines(int fd, t_data *data, t_list **map_lines,
 			free(file);
 		file = get_next_line(fd);
 	}
+	borrar_solo_comprueba(data);
 	return (0);
 }
 
@@ -96,7 +105,7 @@ int	parse_file(int fd, t_data *data)
 	map_started = 0;
 	map_lines = NULL;
 	if (read_lines(fd, data, &map_lines, &map_started) == -1)
-		return (error("Invalid element\n"));
+		return (-1);//error("invalid element\n"));
 	if (!map_started)
 	{
 		ft_lstclear(&map_lines, free);

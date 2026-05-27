@@ -15,7 +15,7 @@
 /*Función de error principal*/
 int	error(char *message)
 {
-	ft_putstr_fd(RED "Error: \n" RESET, 2);
+	ft_putstr_fd(RED "Error: " RESET, 2);
 	ft_putstr_fd(message, 2);
 	return (-1);
 }
