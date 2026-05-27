@@ -1,7 +1,7 @@
-SO ./imgs/murosur
-NO ./imgs/muronorte
-WE ./imgs/muroOeste
-EA ./imgs/muroeste
+SO ./imgs/murosur.xpm
+NO ./imgs/muronorte.xpm
+WE ./imgs/muroOeste.xpm
+EA ./imgs/muroeste.xpm
 F 139,69,19
 C 135,206,235
 

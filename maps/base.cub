@@ -1,7 +1,7 @@
 F 1,100,1
 C 225,53 ,58
 
-NO ./path.xpmm
+NO ./path.xpm
 SO ./path.xpm
 WE ./path.xpm
 EA ./path.xpm

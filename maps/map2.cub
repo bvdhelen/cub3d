@@ -1,7 +1,7 @@
-SO ./imgs/tech1
-WE ./imgs/tech2
-EA ./imgs/tech3
-NO ./imgs/tech4
+SO ./imgs/tech1.xpm
+WE ./imgs/tech2.xpm
+EA ./imgs/tech3.xpm
+NO ./imgs/tech4.xpm
 F 139,69,19
 C 135,206,235
 
