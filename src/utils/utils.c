@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 00:39:44 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/05/25 01:15:22 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/10 20:36:06 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,17 @@ char	*skip_spaces(char *str)
 	while (*str && ft_isspace(*str))
 		str++;
 	return (str);
+}
+
+int	rgb_to_hex(int *rgb)
+{
+	int	hex;
+
+	hex = (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	return (hex);
+}
+
+float	get_distance(float x, float y)
+{
+	return (sqrt(x * x + y * y));
 }

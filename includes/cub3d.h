@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/25 01:15:40 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/10 21:03:25 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <signal.h>
+# include <math.h>
+# include <sys/time.h>
 
 // Definir códigos de color
 # define BLACK		"\033[0;30m"
@@ -35,13 +37,21 @@
 # define RESET		"\033[0m"
 
 // Definir el ancho y alto de la ventana
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920 //1500
+# define WIN_HEIGHT 1080 //800
 
-// Definir el tamaño de celda
-#define TILE_SIZE 22
+// Definir el tamaño de celda y de jugador
+# define TILE_SIZE 22
+# define PLAYER_SIZE 7
 
-//estructura para flood fill
+// pi y campo de visión (field of view) de 60°
+# define PI 3.141592653589793
+# define FOV 1.0471975511965976
+
+// TRUE para ver en 2D; FALSE para ver en 3D
+# define CUB2D 1
+
+// Estructura para flood fill
 typedef struct s_flood
 {
 	char	**map;
@@ -49,7 +59,7 @@ typedef struct s_flood
 	int		h;
 }	t_flood;
 
-//estructura de imagen
+// Estructura de imagen
 typedef struct s_imagen
 {
 	void	*img;
@@ -68,11 +78,26 @@ typedef struct s_texture
 	int		height;
 }	t_texture;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+
+	int		forward;
+	int		back;
+	int		left;
+	int		right;
+
+	int		rotate_left;
+	int		rotate_right;
+}	t_player;
+
 typedef struct s_data
 {
 	void		*mlx_connection;
 	void		*window;
-	t_imagen	imagen; //primera struct
+	t_imagen	imagen;
 
 	//mapa
 	char		**map;
@@ -80,8 +105,10 @@ typedef struct s_data
 	int			map_height;
 
 	//techo y suelo
-	int			floor_color[3];
-	int			ceiling_color[3];
+	int			floor_rgb[3];
+	int			floor_color;
+	int			ceiling_rgb[3];
+	int			ceiling_color;
 	
     //paredes
 	t_texture	north;
@@ -97,47 +124,60 @@ typedef struct s_data
 	int			east_set;
 	int			west_set;
 
-    // Jugador: posición, dirección hacia donde mira, campo de visión
-	double		pos_x;
-	double		pos_y;
-	double		dir_x;
-	double		dir_y;
-	double		plane_x;
-	double		plane_y;
+    //jugador
+	t_player	player;
 
 }	t_data;
+
+//utils
+void	charnull_gnl(char *s);
+char	*skip_spaces(char *str);
+int		rgb_to_hex(int *rgb);
+float	get_distance(float x, float y);
 
 void	error_arg(void);
 int		error(char *message);
 
-void 	free_all(t_data *data);
-void	charnull_gnl(char *s);
-char	*skip_spaces(char *str);
+void	free_all(t_data *data);
 
-char	*skip_spaces(char *str);
-int		parse_color(char *file, t_data *data);
-int		parse_texture(char *file, t_data *data);
+
+//parse
+//int		parse_color(char *file, t_data *data);
+//int		parse_texture(char *file, t_data *data);
+int		parse_color1(char *file, t_data *data);
 int		parse_elements(char *file, t_data *data);
 
-int	check_closed(t_data *data, int px, int py);
-int	count_player(t_data *data, int *px, int *py);
-int	invalid_chars(t_data *data);
-int	build_map_from_list(t_data *data, t_list *map_lines);
-int	parse_map(t_data *data, t_list *map_lines);
+int		check_closed(t_data *data, int px, int py);
+int		count_player(t_data *data, int *px, int *py);
+int		invalid_chars(t_data *data);
+int		build_map_from_list(t_data *data, t_list *map_lines);
+int		parse_map(t_data *data, t_list *map_lines);
 
 int		is_map_line(char *line);
 int		parse_file(int fd, t_data *data);
 
+//init
 t_data	*init_data(void);
 int		init_window(t_data *data);
 void	init_image(t_data *data);
-void	init_set(t_data *data);//ketchup
+void	init_set(t_data *data);
+void	init_player(t_player *player);
 
+//hooks
 int		handle_key(int key, t_data *data);
 int		handle_event(t_data *data);
+void	hooks(t_data *data);
+
+//render
+void	put_pixel(t_data *data, int x, int y, int color);
+void	clear_image(t_data *data);
+void	draw_player(t_data *data, int x, int y, int color);
+void	draw_square(t_data *data, int x, int y, int color);
+void	draw_mapaa(t_data *data);
+int		touch_wall(t_data *data, float pos_x, float pos_y);
+void	move_player(t_data *data, t_player *player);
+int		draw_loop(t_data *data);
 
 void	draw_map(t_data *data);
-void	draw_square(t_data *data, int x, int y, int color);
-void	put_pixel(t_data *data, int x, int y, int color);
 
 #endif

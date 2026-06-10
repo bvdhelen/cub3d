@@ -43,11 +43,15 @@ SRC =	src/main.c \
 		src/utils/utils.c \
 		src/parse/parse.c \
 		src/parse/parse_map.c \
+		src/parse/parse_color.c \
 		src/parse/parse_elements.c \
 		src/parse/map_utils1.c \
 		src/parse/map_utils2.c \
 		src/init/init.c \
 		src/hooks/hooks.c \
+		src/render/drawing.c \
+		src/render/move.c \
+		src/render/render.c \
 
 OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
 

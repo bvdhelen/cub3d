@@ -6,11 +6,28 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 18:18:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/05/04 20:40:36 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/10 20:28:39 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	release_key(int key, t_player *player)
+{
+	if (key == XK_w)
+		player->forward = 0;
+	if (key == XK_s)
+		player->back = 0;
+	if (key == XK_a)
+		player->left = 0;
+	if (key == XK_d)
+		player->right = 0;
+	if (key == XK_Left)
+		player->rotate_left = 0;
+	if (key == XK_Right)
+		player->rotate_right = 0;
+	return (0);
+}
 
 int	handle_key(int key, t_data *data)
 {
@@ -20,7 +37,18 @@ int	handle_key(int key, t_data *data)
 		free_all(data);
 		exit(0);
 	}
-    // + teclas
+	if (key == XK_w)
+		data->player.forward = 1;
+	if (key == XK_s)
+		data->player.back = 1;
+	if (key == XK_a)
+		data->player.left = 1;
+	if (key == XK_d)
+		data->player.right = 1;
+	if (key == XK_Left)
+		data->player.rotate_left = 1;
+	if (key == XK_Right)
+		data->player.rotate_right = 1;
 	return (0);
 }
 
@@ -30,4 +58,11 @@ int	handle_event(t_data *data)
 	free_all(data);
 	exit(0);
 	return (0);
+}
+
+void	hooks(t_data *data)
+{
+	mlx_hook(data->window, 17, 1L << 17, handle_event, data);
+	mlx_hook(data->window, 2, 1L << 0, handle_key, data);
+	mlx_hook(data->window, 3, 1L << 1, release_key, &data->player);
 }
