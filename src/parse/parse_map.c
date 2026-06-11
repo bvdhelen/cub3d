@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:45:50 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/10 20:41:19 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/11 21:27:02 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,48 +67,7 @@ int	check_closed(t_data *data, int px, int py)
 	return (i);
 }
 
-/*
- * Asigna los vectores de dirección y plano según el carácter del jugador.
- * Campo de visiónen Raycasting: entre 60º-90º
- * 0.66 = tan(30º) creo que si se puede usar math.h es mejor eso!!
- * https://lodev.org/cgtutor/raycasting.html
- */
-// static void	set_player_dir_ns(t_data *data, char dir)
-// {
-// 	if (dir == 'N')
-// 	{
-// 		data->dir_x = 0;
-// 		data->dir_y = -1;
-// 		data->plane_x = 0.66;
-// 		data->plane_y = 0;
-// 	}
-// 	else if (dir == 'S')
-// 	{
-// 		data->dir_x = 0;
-// 		data->dir_y = 1;
-// 		data->plane_x = -0.66;
-// 		data->plane_y = 0;
-// 	}
-// }
-
-// static void	set_player_dir_ew(t_data *data, char dir)
-// {
-// 	if (dir == 'E')
-// 	{
-// 		data->dir_x = 1;
-// 		data->dir_y = 0;
-// 		data->plane_x = 0;
-// 		data->plane_y = 0.66;
-// 	}
-// 	else if (dir == 'W')
-// 	{
-// 		data->dir_x = -1;
-// 		data->dir_y = 0;
-// 		data->plane_x = 0;
-// 		data->plane_y = -0.66;
-// 	}
-// }
-
+// Asigna los vectores de dirección y plano según el carácter del jugador.
 static void	set_player_angle(t_data *data, char dir)
 {
 	if (dir == 'N')
@@ -154,21 +113,15 @@ int	parse_map(t_data *data, t_list *map_lines)
 	if (build_map_from_list(data, map_lines) == -1)
 		return (-1);
 	if (invalid_chars(data))
-		return (error("Invalid map\tInvalid chars\n"));
+		return (error("invalid map: invalid chars\n"));
 	if (count_player(data, &px, &py) != 1)
-		return (error("Invalid map\tInvalid number of players\n"));
+		return (error("invalid map: invalid number of players\n"));
 	player = data->map[py][px];
 	data->map[py][px] = '0';
 	if (!check_closed(data, px, py))
-		return (error("Invalid map\tMap not closed\n"));
-	//data->pos_x = px + 0.5;
-	//data->pos_y = py + 0.5;
+		return (error("invalid map: map not closed\n"));
 	data->player.x = (px + 0.5) * TILE_SIZE;
 	data->player.y = (py + 0.5) * TILE_SIZE;
-	// if (player == 'N' || player == 'S')
-	// 	set_player_dir_ns(data, player);
-	// else
-	// 	set_player_dir_ew(data, player);
 	set_player_angle(data, player);
 	return (0);
 }

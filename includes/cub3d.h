@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/11 19:32:00 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/11 21:19:09 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define FOV 1.0471975511965976
 
 // TRUE para ver en 2D; FALSE para ver en 3D
-# define CUB2D 1
+# define CUB2D 0
 
 // Estructura para flood fill
 typedef struct s_flood
@@ -125,6 +125,7 @@ typedef struct s_data
 	int			east_set;
 	int			west_set;
 
+	int			fd;
     //jugador
 	t_player	player;
 
@@ -143,8 +144,6 @@ void	free_all(t_data *data);
 
 
 //parse
-//int		parse_color(char *file, t_data *data);
-//int		parse_texture(char *file, t_data *data);
 int		parse_color1(char *file, t_data *data);
 int		parse_elements(char *file, t_data *data);
 
@@ -165,8 +164,6 @@ void	init_set(t_data *data);
 void	init_player(t_player *player);
 
 //hooks
-int		handle_key(int key, t_data *data);
-int		handle_event(t_data *data);
 void	hooks(t_data *data);
 
 //render

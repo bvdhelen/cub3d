@@ -6,7 +6,7 @@
 /*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 18:18:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/10 20:28:39 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/11 21:17:01 by eldiaz-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	release_key(int key, t_player *player)
 	return (0);
 }
 
-int	handle_key(int key, t_data *data)
+int	press_key(int key, t_data *data)
 {
 	if (key == XK_Escape)
 	{
@@ -63,6 +63,6 @@ int	handle_event(t_data *data)
 void	hooks(t_data *data)
 {
 	mlx_hook(data->window, 17, 1L << 17, handle_event, data);
-	mlx_hook(data->window, 2, 1L << 0, handle_key, data);
+	mlx_hook(data->window, 2, 1L << 0, press_key, data);
 	mlx_hook(data->window, 3, 1L << 1, release_key, &data->player);
 }
