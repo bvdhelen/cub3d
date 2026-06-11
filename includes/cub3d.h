@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/10 21:03:25 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/11 19:32:00 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,13 @@
 # define RESET		"\033[0m"
 
 // Definir el ancho y alto de la ventana
-# define WIN_WIDTH 1920 //1500
-# define WIN_HEIGHT 1080 //800
+# define WIN_WIDTH 1500 //1920
+# define WIN_HEIGHT 800 //1080
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
-# define PLAYER_SIZE 7
+# define PLAYER_SIZE 20
+# define PLAYER_RADIUS 40
 
 // pi y campo de visión (field of view) de 60°
 # define PI 3.141592653589793

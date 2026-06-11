@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:37:04 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/10 20:37:16 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/11 19:32:41 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,21 @@ void	clear_image(t_data *data)
 void	draw_player(t_data *data, int x, int y, int color)
 {
 	int	i;
+	int j;
 
-	i = 0;
+	i = -1;
+	j = (PLAYER_SIZE / -2);
 	while (i++ < PLAYER_SIZE)
-		put_pixel(data, x + i, y, color);
-	i = 0;
+		put_pixel(data, x + i + j, y + j, color);
+	i = -1;
 	while (i++ < PLAYER_SIZE)
-		put_pixel(data, x, y + i, color);
-	i = 0;
+		put_pixel(data, x + j, y + i + j, color);
+	i = -1;
 	while (i++ < PLAYER_SIZE)
-		put_pixel(data, x + PLAYER_SIZE, y + i, color);
-	i = 0;
+		put_pixel(data, x + PLAYER_SIZE + j, y + i + j, color);
+	i = -1;
 	while (i++ < PLAYER_SIZE)
-		put_pixel(data, x + i, y + PLAYER_SIZE, color);
+		put_pixel(data, x + i + j, y + PLAYER_SIZE + j, color);
 }
 
 void	draw_square(t_data *data, int x, int y, int color)
