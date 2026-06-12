@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:36:43 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 16:05:01 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/12 18:53:02 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	touch_wall(t_data *data, float pos_x, float pos_y)
 		return (1);
 	x = (int)(pos_x / TILE_SIZE);
 	y = (int)(pos_y / TILE_SIZE);
-	if (y >= data->map_height || x >= (int)ft_strlen(data->map[y]))
+	if (y >= data->map_height || x >= data->map_width)
 		return (1);
 	if (data->map[y][x] == '1')
 		return (1);
@@ -38,25 +38,48 @@ void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
 	float	angle;
 	float	check_x;
 	float	check_y;
+	int		colision_x = 0;
+	int		colision_y = 0;
 
-	speed = 3.0;
+	speed = 2.5f;
 	new_x = player->x + move_x * speed;
 	new_y = player->y + move_y * speed;
-
 	// Comprobar colisión circular: muestrear puntos alrededor del perímetro
-	angle_step = 8;  // número de puntos a comprobar (cuantos más, más preciso)
+	angle_step = 12;  // número de puntos a comprobar (cuantos más, más preciso)
+	
+	// Movimiento en X (horizontal)
 	angle = 0;
 	while (angle < 2 * PI)
 	{
-		check_x = new_x + cos(angle) * PLAYER_RADIUS;
-		check_y = new_y + sin(angle) * PLAYER_RADIUS;
+		check_x = new_x + cosf(angle) * PLAYER_RADIUS;
+		check_y = player->y + sinf(angle) * PLAYER_RADIUS;
 		if (touch_wall(data, check_x, check_y))
-			return ; // hay colisión, no se mueve
+		{
+			colision_x = 1;
+			break ;
+		}
 		angle += 2 * PI / angle_step;
 	}
 	// Sin colisión, actualizar posición
-	player->x = new_x;
-	player->y = new_y;
+	if (!colision_x)
+		player->x = new_x;
+	
+	// Movimiento en Y (vertical)
+	angle = 0;
+	while (angle < 2 * PI)
+	{
+		check_x = player->x + cosf(angle) * PLAYER_RADIUS;
+		check_y = new_y + sinf(angle) * PLAYER_RADIUS;
+		if (touch_wall(data, check_x, check_y))
+		{
+			colision_y = 1;
+			break ;
+		}
+		angle += 2 * PI / angle_step;
+	}
+	// Sin colisión, actualizar posición
+	if (!colision_y)
+		player->y = new_y;
 }
 
 // void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
@@ -103,43 +126,53 @@ void	move_player(t_data *data, t_player *player)
 	float	angle_speed;
 	float	cos_angle;
 	float	sin_angle;
-	float move_x = 0;
-	float move_y = 0;
+	float 	move_x = 0;
+	float 	move_y = 0;
+	float	len;
 
-	angle_speed = 0.03;
+	move_x = 0;
+	move_y = 0;
+	angle_speed = 0.03f;
+	// Rotación
 	if (player->rotate_left)
 		player->angle -= angle_speed;
 	if (player->rotate_right)
 		player->angle += angle_speed;
+	// Ajustar ángulo dentro de [0, 2*PI]
 	if (player->angle >= 2 * PI)
 		player->angle -= 2 * PI;
 	if (player->angle < 0)
 		player->angle += 2 * PI;
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
+	cos_angle = cosf(player->angle);
+	sin_angle = sinf(player->angle);
+	// Acumular dirección de movimiento
 	if (player->forward)
 	{
 		move_x += cos_angle;
 		move_y += sin_angle;
-		//move_vector(data, player, cos_angle, sin_angle);
 	}
 	if (player->back)
 	{
 		move_x -= cos_angle;
 		move_y -= sin_angle;
-		//move_vector(data, player, -cos_angle, -sin_angle);
 	}
 	if (player->left)
 	{
 		move_x += sin_angle;
 		move_y -= cos_angle;
-		//move_vector(data, player, sin_angle, -cos_angle);
 	}
 	if (player->right)
 	{
 		move_x -= sin_angle;
 		move_y += cos_angle;
-		//move_vector(data, player, -sin_angle, cos_angle);
 	}
+	// Normalizar para que la velocidad sea constante en cualquier dirección
+	len = sqrtf(move_x * move_x + move_y * move_y);
+	if (len > 0.001f)
+	{
+		move_x /= len;
+		move_y /= len;
+	}
+	// Aplicar el movimiento
 	move_vector(data, player, move_x, move_y);
 }

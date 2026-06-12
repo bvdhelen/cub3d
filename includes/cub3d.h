@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 16:20:53 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/12 18:36:58 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,14 @@
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
 # define PLAYER_SIZE 11
-# define PLAYER_RADIUS 8
+# define PLAYER_RADIUS 6
 
 // pi y campo de visión (field of view) de 60°, FOV es pi/3
 # define PI 3.141592653589793
 # define FOV 1.0471975511965976
 
 // TRUE para ver en 2D; FALSE para ver en 3D
-# define CUB2D 1
+# define CUB2D 0
 
 // Estructura para flood fill
 typedef struct s_flood

@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:35:58 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 16:08:47 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/12 18:07:04 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int	draw_loop(t_data *data)
 	float		start_x;
 	int			i;
 
-	// if (frame_limit())
+	// if (frame_limit()) //ketchup
 	// 	return (0);
 	player = &data->player;
 	move_player(data, player);

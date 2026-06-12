@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:41:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 16:13:35 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/12 18:03:52 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int	set_color(char **rgb, t_data *data, char type)
 
 int	parse_color2(char *info, char type, t_data *data)
 {
-	char	**rgb;
 	int		i;
+	char	**rgb;
+	char	*trimmed; //y esto
 
 	rgb = ft_split(info, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
@@ -67,7 +68,9 @@ int	parse_color2(char *info, char type, t_data *data)
 	i = 0;
 	while (rgb[i])
 	{
-		if (overflow_n_checknum(rgb[i]))
+		//ketchup -> he añadido esto porque no iba con espacios
+		trimmed = skip_spaces(rgb[i]);
+		if (overflow_n_checknum(trimmed))
 			return (ft_freedp(rgb), -1);
 		i++;
 	}
