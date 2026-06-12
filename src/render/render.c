@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:35:58 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/10 20:36:27 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/12 16:08:47 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,30 +54,45 @@ float	get_corrected_distance(t_player *player, float hit_x, float hit_y)
 			jugador
 *///borrar cuando lo vea elena
 
-void	draw_surfaces(t_data *data, float distance, int i)
+// altura_pared = (TILE_SIZE / distancia_perpendicular) * distancia_al_plano
+void	draw_surfaces(t_data *data, float distance, int x)
 {
 	int		y;
-	float	height;
+	int		end_y;
 	int		start_y;
-	int		end;
+	float	height;
+	float	plane_dist;
 
-	y = 0;
-	height = (TILE_SIZE / distance) * (WIN_WIDTH / 2);
+	// Distancia al plano de proyección (evita el ojo de pez)
+	plane_dist = (WIN_WIDTH / 2.0f) / tanf(FOV / 2.0f);
+	// Altura de la pared en píxeles
+	height = (TILE_SIZE / distance) * plane_dist;
+	// Limitar altura para valores extremos
+	if (height > WIN_HEIGHT * 2)
+		height = WIN_HEIGHT * 2;
 	start_y = (WIN_HEIGHT - height) / 2;
-	end = start_y + height;
-	while (y < start_y)//techo
+	if (start_y < 0)
+		start_y = 0;
+	end_y = start_y + height;
+	if (end_y > WIN_HEIGHT)
+		end_y = WIN_HEIGHT;
+	// Techo
+	y = 0;
+	while (y < start_y)
 	{
-		put_pixel(data, i, y, data->ceiling_color);
+		put_pixel(data, x, y, data->ceiling_color);
 		y++;
 	}
-	while (y < end)//pared
+	// Pared (de momento color, luego texturas)
+	while (y < end_y)
 	{
-		put_pixel(data, i, y, 000000000);
+		put_pixel(data, x, y, 0x808080);
 		y++;
 	}
-	while (y < WIN_HEIGHT)//suelo
+	// Suelo
+	while (y < WIN_HEIGHT)
 	{
-		put_pixel(data, i, y, data->floor_color);
+		put_pixel(data, x, y, data->floor_color);
 		y++;
 	}
 }
@@ -116,8 +131,8 @@ int	draw_loop(t_data *data)
 	float		start_x;
 	int			i;
 
-	if (frame_limit())
-		return (0);
+	// if (frame_limit())
+	// 	return (0);
 	player = &data->player;
 	move_player(data, player);
 	if (CUB2D)

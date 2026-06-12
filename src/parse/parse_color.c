@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:41:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/10 20:41:48 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/12 16:13:35 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	overflow_n_checknum(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (ft_isdigit(s[i]))
-			return (0);
+		if (!ft_isdigit(s[i]))
+			return (error("invalid element: not a digit\n"));
 		i++;
 	}
-	return (error("invalid element: missing number\n"));
+	return (0);
 }
 
 int	set_color(char **rgb, t_data *data, char type)

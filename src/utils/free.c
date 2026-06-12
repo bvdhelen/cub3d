@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/11 21:20:12 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:36:25 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_textures_addr(t_data *data)
+static void	free_textures_path(t_data *data)
 {
-	if (data->north.addr)
-		free(data->north.addr);
-	if (data->south.addr)
-		free(data->south.addr);
-	if (data->east.addr)
-		free(data->east.addr);
-	if (data->west.addr)
-		free(data->west.addr);
+	if (data->north.path)
+		free(data->north.path);
+	if (data->south.path)
+		free(data->south.path);
+	if (data->east.path)
+		free(data->east.path);
+	if (data->west.path)
+		free(data->west.path);
 }
 
 void free_all(t_data *data)
@@ -37,15 +37,16 @@ void free_all(t_data *data)
 			free(data->map[i++]);
 		free(data->map);
 	}
-	// if (data->north.path)
-	// 	free(data->north.path);
-	// if (data->south.path)
-	// 	free(data->south.path);
-	// if (data->east.path)
-	// 	free(data->east.path);
-	// if (data->west.path)
-	// 	free(data->west.path);
-	free_textures_addr(data);
+	free_textures_path(data);
+	// Liberar las imagenes de las texturas
+	// if (data->north.img)
+	// 	mlx_destroy_image(data->mlx_connection, data->north.img);
+	// if (data->south.img)
+	// 	mlx_destroy_image(data->mlx_connection, data->south.img);
+	// if (data->east.img)
+	// 	mlx_destroy_image(data->mlx_connection, data->east.img);
+	// if (data->west.img)
+	// 	mlx_destroy_image(data->mlx_connection, data->west.img);
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
 	if (data->window)

@@ -12,11 +12,11 @@
 
 #include "cub3d.h"
 
-int	set_texture(char *path, char **addr, int *set)
+int	set_texture(char *path, char **dest_path, int *set)
 {
-	if (*addr)
+	if (*dest_path)
 		return (free(path), error("invalid element: duplicate texture\n"));
-	*addr = path;
+	*dest_path = path;
 	*set = 1;
 	return (0);
 }
@@ -39,13 +39,13 @@ int	parse_texture(char *file, t_data *data)
 	if (!path)
 		return (error("invalid element: invalid texture\n"));
 	if (type == 'N')
-		return (set_texture(path, &data->north.addr, &data->north_set));
+		return (set_texture(path, &data->north.path, &data->north_set));
 	else if (type == 'S')
-		return (set_texture(path, &data->south.addr, &data->south_set));
+		return (set_texture(path, &data->south.path, &data->south_set));
 	else if (type == 'E')
-		return (set_texture(path, &data->east.addr, &data->east_set));
+		return (set_texture(path, &data->east.path, &data->east_set));
 	else if (type == 'W')
-		return (set_texture(path, &data->west.addr, &data->west_set));
+		return (set_texture(path, &data->west.path, &data->west_set));
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/11 21:19:09 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/12 16:20:53 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@
 # define RESET		"\033[0m"
 
 // Definir el ancho y alto de la ventana
-# define WIN_WIDTH 1500 //1920
-# define WIN_HEIGHT 800 //1080
+# define WIN_WIDTH 1920 //1500 //1920
+# define WIN_HEIGHT 1080 //800 //1080
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
-# define PLAYER_SIZE 20
-# define PLAYER_RADIUS 40
+# define PLAYER_SIZE 11
+# define PLAYER_RADIUS 8
 
-// pi y campo de visión (field of view) de 60°
+// pi y campo de visión (field of view) de 60°, FOV es pi/3
 # define PI 3.141592653589793
 # define FOV 1.0471975511965976
 
 // TRUE para ver en 2D; FALSE para ver en 3D
-# define CUB2D 0
+# define CUB2D 1
 
 // Estructura para flood fill
 typedef struct s_flood
