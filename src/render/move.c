@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:36:43 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 18:53:02 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/13 13:47:47 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	touch_wall(t_data *data, float pos_x, float pos_y)
 
 void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
 {
-	float	speed;
 	float	new_x;
 	float	new_y;
 	int		angle_step;
@@ -41,9 +40,8 @@ void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
 	int		colision_x = 0;
 	int		colision_y = 0;
 
-	speed = 2.5f;
-	new_x = player->x + move_x * speed;
-	new_y = player->y + move_y * speed;
+	new_x = player->x + move_x * MOVE_SPEED;
+	new_y = player->y + move_y * MOVE_SPEED;
 	// Comprobar colisión circular: muestrear puntos alrededor del perímetro
 	angle_step = 12;  // número de puntos a comprobar (cuantos más, más preciso)
 	
@@ -123,7 +121,6 @@ void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
 
 void	move_player(t_data *data, t_player *player)
 {
-	float	angle_speed;
 	float	cos_angle;
 	float	sin_angle;
 	float 	move_x = 0;
@@ -132,12 +129,11 @@ void	move_player(t_data *data, t_player *player)
 
 	move_x = 0;
 	move_y = 0;
-	angle_speed = 0.03f;
 	// Rotación
 	if (player->rotate_left)
-		player->angle -= angle_speed;
+		player->angle -= ROTATE_SPEED;
 	if (player->rotate_right)
-		player->angle += angle_speed;
+		player->angle += ROTATE_SPEED;
 	// Ajustar ángulo dentro de [0, 2*PI]
 	if (player->angle >= 2 * PI)
 		player->angle -= 2 * PI;

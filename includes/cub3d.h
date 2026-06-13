@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 18:36:58 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/13 13:55:09 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@
 # define TILE_SIZE 22
 # define PLAYER_SIZE 11
 # define PLAYER_RADIUS 6
+
+// Velocidades del jugador
+# define MOVE_SPEED   2.0f   //1.5f debug // píxeles por frame
+# define ROTATE_SPEED  0.02f  //0.015f debug // radianes por frame
 
 // pi y campo de visión (field of view) de 60°, FOV es pi/3
 # define PI 3.141592653589793
