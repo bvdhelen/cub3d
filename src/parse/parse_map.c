@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:45:50 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/11 21:27:02 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/13 19:25:22 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,19 +80,6 @@ static void	set_player_angle(t_data *data, char dir)
 		data->player.angle = PI;
 }
 
-// DEBUG HELPER
-// static void	print_map(t_data *data)
-// {
-// 	int i = 0;
-
-// 	printf("MAP (%d x %d):\n", data->map_width, data->map_height);
-// 	while (data->map[i])
-// 	{
-// 		printf("[%s]\n", data->map[i]);
-// 		i++;
-// 	}
-// }
-
 /*
  * Función principal parse_map:
  * 1. Construye la matriz data->map a partir de la lista map_lines.
@@ -120,8 +107,8 @@ int	parse_map(t_data *data, t_list *map_lines)
 	data->map[py][px] = '0';
 	if (!check_closed(data, px, py))
 		return (error("invalid map: map not closed\n"));
-	data->player.x = (px + 0.5) * TILE_SIZE;
-	data->player.y = (py + 0.5) * TILE_SIZE;
+	data->player.x = px + 0.5;
+	data->player.y = py + 0.5;
 	set_player_angle(data, player);
 	return (0);
 }

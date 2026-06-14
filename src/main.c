@@ -44,7 +44,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	data->fd = fd;
-	init_set(data);
+	//init_set(data); //ketchup es redundante
 	if (parse_file(fd, data) == -1)
 	{
 		close(fd);
@@ -54,9 +54,8 @@ int	main(int argc, char **argv)
 	if (!init_window(data))
 		return (1);
 	init_image(data);
-	//display_instructions(data);
 	hooks(data);
 	mlx_loop_hook(data->mlx_connection, draw_loop, data);
 	mlx_loop(data->mlx_connection);
-	return (3);
+	return (0);
 }

@@ -3,14 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/11 21:09:57 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/13 19:52:46 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+// DEBUG HELPER
+static void	borrar_solo_comprueba(t_data *data)//ketchup
+{
+	printf("N -> '%s'\n", data->north.path);
+	printf("S -> '%s'\n", data->south.path);
+	printf("E -> '%s'\n", data->east.path);
+	printf("W -> '%s'\n", data->west.path);
+	printf("F -> '%i' '%i' '%i'\n", data->floor_rgb[0], data->floor_rgb[1], data->floor_rgb[2]);
+	printf("C -> '%i' '%i' '%i'\n", data->ceiling_rgb[0], data->ceiling_rgb[1], data->ceiling_rgb[2]);
+	
+	int i = 0;
+
+	printf("MAP (%d x %d):\n", data->map_width, data->map_height);
+	while (data->map[i])
+	{
+		printf("[%s]\n", data->map[i]);
+		i++;
+	}
+}
 
 int	is_map_line(char *line)
 {
@@ -32,6 +52,17 @@ static void	clean_gnl(int fd)
 		free(tmp);
 		tmp = get_next_line(fd);
 	}
+}
+
+static int	is_empty_line(char *line)
+{
+	while (*line)
+	{
+		if (!ft_isspace(*line))
+			return (0);
+		line++;
+	}
+	return (1);
 }
 
 /*
@@ -56,45 +87,39 @@ static int	process_line(char *line, t_data *data, int *map_started)
 		else
 			return (0);
 	}
-	return (1);
-}
-
-static void	borrar_solo_comprueba(t_data *data)//ketchup
-{
-	printf("N -> '%s'\n", data->north.addr);
-	printf("S -> '%s'\n", data->south.addr);
-	printf("E -> '%s'\n", data->east.addr);
-	printf("W -> '%s'\n", data->west.addr);
-	printf("F -> '%i' '%i' '%i'\n", data->floor_rgb[0], data->floor_rgb[1], data->floor_rgb[2]);
-	printf("C -> '%i' '%i' '%i'\n", data->ceiling_rgb[0], data->ceiling_rgb[1], data->ceiling_rgb[2]);
+	else
+	{
+		if (is_empty_line(line))
+			return(error("invalid map: empty line inside map\n"));
+		return (1);
+	}
 }
 
 static int	read_lines(int fd, t_data *data, t_list **map_lines,
 		int *map_started)
 {
-	char	*file;
+	char	*line;
 	int		ret;
 
-	file = get_next_line(fd);
-	while (file)
+	line = get_next_line(fd);
+	while (line)
 	{
-		charnull_gnl(file);
-		ret = process_line(file, data, map_started);
+		charnull_gnl(line);
+		ret = process_line(line, data, map_started);
 		if (ret == -1)
 		{
-			free(file);
+			free(line);
 			clean_gnl(fd);
 			return (-1);
 		}
 		if (ret == 1)
 		{
-			ft_lstadd_back(map_lines, ft_lstnew(file));
+			ft_lstadd_back(map_lines, ft_lstnew(line));
 		}
 		else
-			free(file);
-		file = get_next_line(fd);
+			free(line);
+		line = get_next_line(fd);
 	}
-	borrar_solo_comprueba(data);
 	return (0);
 }
 
@@ -107,19 +132,26 @@ int	parse_file(int fd, t_data *data)
 	map_started = 0;
 	map_lines = NULL;
 	if (read_lines(fd, data, &map_lines, &map_started) == -1)
+	{
+		ft_lstclear(&map_lines, free);
 		return (-1);
+	}
 	if (!map_started)
 	{
 		ft_lstclear(&map_lines, free);
-		return (error("No map found\n"));
+		return (error("no map found\n"));
 	}
 	if (!data->floor_set || !data->ceiling_set
 		|| !data->north_set || !data->south_set
 		|| !data->east_set || !data->west_set)
-		return (error("Mising elements\n"));
+	{
+		ft_lstclear(&map_lines, free);
+		return (error("mising elements\n"));
+	}
 	data->floor_color = rgb_to_hex(data->floor_rgb);
 	data->ceiling_color = rgb_to_hex(data->ceiling_rgb);
 	result = parse_map(data, map_lines);
+	borrar_solo_comprueba(data);
 	ft_lstclear(&map_lines, free);
 	if (result == -1)
 		return (-1);

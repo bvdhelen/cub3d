@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/10 20:31:56 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/13 19:56:54 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,20 @@ t_data	*init_data(void)
         return (NULL);
 	}
     ft_bzero(data, sizeof(t_data));
-    //set_default_values(data);//ketchup
+	data->fd = -1;
 	return (data);
 }
 
-void	init_set(t_data *data)
-{
-	data->floor_set = 0;
-	data->ceiling_set = 0;
-	data->north_set = 0;
-	data->south_set = 0;
-	data->east_set = 0;
-	data->west_set = 0;
-}
+//¿creo que es redundante y sobra?
+// void	init_set(t_data *data)
+// {
+// 	data->floor_set = 0;
+// 	data->ceiling_set = 0;
+// 	data->north_set = 0;
+// 	data->south_set = 0;
+// 	data->east_set = 0;
+// 	data->west_set = 0;
+// }
 
 int	init_window(t_data *data)
 {

@@ -39,7 +39,6 @@ RESET = \033[0m
 SRC =	src/main.c \
 		src/utils/error.c \
 		src/utils/free.c \
-		src/utils/minimap.c \
 		src/utils/utils.c \
 		src/parse/parse.c \
 		src/parse/parse_map.c \
@@ -52,6 +51,8 @@ SRC =	src/main.c \
 		src/render/drawing.c \
 		src/render/move.c \
 		src/render/render.c \
+		src/render/render_utils.c \
+		src/render/dda.c \
 
 OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)
 

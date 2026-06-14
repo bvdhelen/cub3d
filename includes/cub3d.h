@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/13 13:55:09 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/14 18:14:53 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
-# define PLAYER_SIZE 11
-# define PLAYER_RADIUS 6
+# define PLAYER_SIZE 20
+# define PLAYER_RADIUS_CELL 0.45f
 
 // Velocidades del jugador
-# define MOVE_SPEED   2.0f   //1.5f debug // píxeles por frame
-# define ROTATE_SPEED  0.02f  //0.015f debug // radianes por frame
+# define MOVE_SPEED   0.12f   // CELDAS por frame
+# define ROTATE_SPEED  0.03f  // radianes por frame
 
 // pi y campo de visión (field of view) de 60°, FOV es pi/3
 # define PI 3.141592653589793
@@ -56,7 +56,6 @@
 // TRUE para ver en 2D; FALSE para ver en 3D
 # define CUB2D 0
 
-// Estructura para flood fill
 typedef struct s_flood
 {
 	char	**map;
@@ -64,11 +63,10 @@ typedef struct s_flood
 	int		h;
 }	t_flood;
 
-// Estructura de imagen
 typedef struct s_imagen
 {
 	void	*img;
-	char	*addr; // img_pixels
+	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
@@ -78,9 +76,12 @@ typedef struct s_texture
 {
 	char	*path;
 	void	*img;
-	char	*addr; //text_pixels
+	char	*addr;
 	int		width;
 	int		height;
+	int		bpp;
+	int		line_len;
+	int		endian;
 }	t_texture;
 
 typedef struct s_player
@@ -135,6 +136,23 @@ typedef struct s_data
 
 }	t_data;
 
+//DDA
+typedef struct s_ray
+{
+    float   dir_x;
+    float   dir_y;
+    float   side_dist_x;
+    float   side_dist_y;
+    float   delta_dist_x;
+    float   delta_dist_y;
+    int     map_x;
+    int     map_y;
+    int     step_x;
+    int     step_y;
+    int     side;
+    float  perp_wall_dist;
+}   t_ray;
+
 //utils
 void	charnull_gnl(char *s);
 char	*skip_spaces(char *str);
@@ -172,14 +190,26 @@ void	hooks(t_data *data);
 
 //render
 void	put_pixel(t_data *data, int x, int y, int color);
+int		frame_limit(void);
+
 void	clear_image(t_data *data);
-void	draw_player(t_data *data, int x, int y, int color);
+void	draw_player(t_data *data, float x, float y, int color);
 void	draw_square(t_data *data, int x, int y, int color);
-void	draw_mapaa(t_data *data);
+void	draw_map(t_data *data);
 int		touch_wall(t_data *data, float pos_x, float pos_y);
 void	move_player(t_data *data, t_player *player);
+
+void 	draw_wall(t_data *data, int x);
 int		draw_loop(t_data *data);
 
-void	draw_map(t_data *data);
+void 	draw_all_rays_2d(t_data *data);
+int 	load_textures(t_data *data);
+
+//dda
+void 	init_ray_direction(t_data *data, int x, t_ray *ray);
+void 	init_step_and_side(t_data *data, t_ray *ray);
+int 	dda_loop(t_data *data, t_ray *ray);
+void 	calc_perp_distance(t_ray *ray);
+void 	draw_vertical_stripe(t_data *data, int x, int start, int end);
 
 #endif
