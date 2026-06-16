@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/13 19:56:54 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/16 20:05:47 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,6 @@ t_data	*init_data(void)
 	data->fd = -1;
 	return (data);
 }
-
-//¿creo que es redundante y sobra?
-// void	init_set(t_data *data)
-// {
-// 	data->floor_set = 0;
-// 	data->ceiling_set = 0;
-// 	data->north_set = 0;
-// 	data->south_set = 0;
-// 	data->east_set = 0;
-// 	data->west_set = 0;
-// }
 
 int	init_window(t_data *data)
 {

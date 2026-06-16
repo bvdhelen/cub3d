@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	data->fd = fd;
-	//init_set(data); //ketchup es redundante
 	if (parse_file(fd, data) == -1)
 	{
 		close(fd);

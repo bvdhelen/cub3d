@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/14 18:14:53 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/16 20:05:38 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
-# define PLAYER_SIZE 20
+# define PLAYER_SIZE 7
 # define PLAYER_RADIUS_CELL 0.45f
 
 // Velocidades del jugador
@@ -182,7 +182,6 @@ int		parse_file(int fd, t_data *data);
 t_data	*init_data(void);
 int		init_window(t_data *data);
 void	init_image(t_data *data);
-void	init_set(t_data *data);
 void	init_player(t_player *player);
 
 //hooks

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/13 19:52:46 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/16 19:56:04 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// DEBUG HELPER
-static void	borrar_solo_comprueba(t_data *data)//ketchup
+/* Debug: Check elements and map*/
+static void	check_parse(t_data *data)
 {
 	printf("N -> '%s'\n", data->north.path);
 	printf("S -> '%s'\n", data->south.path);
@@ -151,7 +151,7 @@ int	parse_file(int fd, t_data *data)
 	data->floor_color = rgb_to_hex(data->floor_rgb);
 	data->ceiling_color = rgb_to_hex(data->ceiling_rgb);
 	result = parse_map(data, map_lines);
-	borrar_solo_comprueba(data);
+	check_parse(data);
 	ft_lstclear(&map_lines, free);
 	if (result == -1)
 		return (-1);

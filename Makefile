@@ -3,7 +3,7 @@ NAME = cub3D
 
 # Compilador y banderas de compilación
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -O3 #-g3 -fsanitize=address
 INCLUDES = -I./includes -Imlx_linux -I./includes/aux/libft -I./includes/aux/gnl
 
 # Linkeo
