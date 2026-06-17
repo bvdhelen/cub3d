@@ -6,36 +6,30 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/16 20:05:47 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:36:01 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*ketchup
-    init_data      → malloc + defaults
-    init_window    → mlx_init + ventana
-    init_image     → imagen principal
-*/
-
 t_data	*init_data(void)
 {
-    t_data  *data;
+	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
 	{
 		error("malloc failed\n");
-        return (NULL);
+		return (NULL);
 	}
-    ft_bzero(data, sizeof(t_data));
+	ft_bzero(data, sizeof(t_data));
 	data->fd = -1;
 	return (data);
 }
 
 int	init_window(t_data *data)
 {
-    data->mlx_connection = mlx_init();
+	data->mlx_connection = mlx_init();
 	if (!data->mlx_connection)
 		return (0);
 	data->window = mlx_new_window(data->mlx_connection,
@@ -47,6 +41,16 @@ int	init_window(t_data *data)
 		return (0);
 	}
 	return (1);
+}
+
+void	init_player(t_player *player)
+{
+	player->forward = 0;
+	player->back = 0;
+	player->left = 0;
+	player->right = 0;
+	player->rotate_left = 0;
+	player->rotate_right = 0;
 }
 
 void	init_image(t_data *data)
@@ -71,14 +75,4 @@ void	init_image(t_data *data)
 		error("imagen pixel address failed\n");
 		return ;
 	}
-}
-
-void	init_player(t_player *player)
-{
-	player->forward = 0;
-	player->back = 0;
-	player->left = 0;
-	player->right = 0;
-	player->rotate_left = 0;
-	player->rotate_right = 0;
 }
