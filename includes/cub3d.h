@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/17 19:35:28 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:35:57 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@
 # define FOV 1.0471975511965976
 
 // TRUE para ver en 2D; FALSE para ver en 3D
-# define CUB2D 1
+# define CUB2D 0
 
 typedef struct s_flood
 {
@@ -153,6 +153,17 @@ typedef struct s_ray
     float  perp_wall_dist;
 }   t_ray;
 
+
+//parse
+int		parse_color1(char *file, t_data *data);
+int		parse_elements(char *file, t_data *data);
+
+int		build_map_from_list(t_data *data, t_list *map_lines);
+int		invalid_chars(t_data *data);
+int		count_player(t_data *data, int *px, int *py);
+int		parse_map(t_data *data, t_list *map_lines);
+int		parse_file(int fd, t_data *data);
+
 //hooks
 void	hooks(t_data *data);
 
@@ -160,7 +171,12 @@ void	hooks(t_data *data);
 t_data	*init_data(void);
 int		init_window(t_data *data);
 void	init_image(t_data *data);
-////void	init_player(t_player *player);
+
+
+
+
+
+
 
 
 
@@ -177,18 +193,6 @@ int		error(char *message);
 void	free_all(t_data *data);
 
 
-//parse
-int		parse_color1(char *file, t_data *data);
-int		parse_elements(char *file, t_data *data);
-
-int		check_closed(t_data *data, int px, int py);
-int		count_player(t_data *data, int *px, int *py);
-int		invalid_chars(t_data *data);
-int		build_map_from_list(t_data *data, t_list *map_lines);
-int		parse_map(t_data *data, t_list *map_lines);
-
-int		is_map_line(char *line);
-int		parse_file(int fd, t_data *data);
 
 //render
 void	put_pixel(t_data *data, int x, int y, int color);

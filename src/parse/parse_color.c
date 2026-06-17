@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:41:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/12 18:03:52 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:28:09 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parse_color2(char *info, char type, t_data *data)
 {
 	int		i;
 	char	**rgb;
-	char	*trimmed; //y esto
+	char	*trimmed;
 
 	rgb = ft_split(info, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
@@ -68,7 +68,6 @@ int	parse_color2(char *info, char type, t_data *data)
 	i = 0;
 	while (rgb[i])
 	{
-		//ketchup -> he añadido esto porque no iba con espacios
 		trimmed = skip_spaces(rgb[i]);
 		if (overflow_n_checknum(trimmed))
 			return (ft_freedp(rgb), -1);

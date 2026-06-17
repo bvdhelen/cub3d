@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:45:50 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/13 19:25:22 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:32:15 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * - '1' y 'F' (ya visitado) son seguros.
  * - ' ' (espacio) significa que no hay pared -> error.
  * - Si sale de los límites del mapa -> error.
- * Retorna 1 si la celda es segura, 0 si encuentra un hueco.
+ * Retorna 1 si la celda es segura, 0 si encuentra un hueco.ketchup
  */
 static int	flood_fill(t_flood *f, int x, int y)
 {
@@ -38,7 +38,7 @@ static int	flood_fill(t_flood *f, int x, int y)
 
 /*
  * Crea una copia del mapa y ejecuta el flood fill desde (px, py).
- * Retorna 1 si el mapa está cerrado, 0 si hay error.
+ * Retorna 1 si el mapa está cerrado, 0 si hay error.ketchup
  */
 int	check_closed(t_data *data, int px, int py)
 {
@@ -67,7 +67,8 @@ int	check_closed(t_data *data, int px, int py)
 	return (i);
 }
 
-// Asigna los vectores de dirección y plano según el carácter del jugador.
+/* Asigna los vectores de dirección y plano según el
+carácter del jugador.ketchup*/
 static void	set_player_angle(t_data *data, char dir)
 {
 	if (dir == 'N')
@@ -89,7 +90,7 @@ static void	set_player_angle(t_data *data, char dir)
  *  - Validación 2: un solo jugador
  * 		(Guardar la posición del jugador y sustituir por '0')
  *  - Validación 3: mapa cerrado
- * 3. Guarda la posición, orientación y vectores de dirección/plano.
+ * 3. Guarda la posición, orientación y vectores de dirección/plano.ketchup
  */
 int	parse_map(t_data *data, t_list *map_lines)
 {

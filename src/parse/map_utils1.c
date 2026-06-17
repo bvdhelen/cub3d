@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/22 12:17:03 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/22 12:24:47 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/17 19:41:05 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	get_max_width(t_data *data)
 	return (max);
 }
 
-/*
+/*ketchup
  * Función para rellenar con espacios.
  * Rellena cada línea del mapa con espacios hasta alcanzar map_width.
  * Retorna 0 en éxito, -1 si falla malloc.
@@ -77,7 +77,7 @@ static int	pad_spaces(t_data *data)
 	return (0);
 }
 
-/* Función que recibe data y la lista, construye el array y devuelvo 0 o -1 */
+/* Función que recibe data y la lista, construye el array y devuelvo 0 o -1 ketchup*/
 int	build_map_from_list(t_data *data, t_list *map_lines)
 {
 	int		i;

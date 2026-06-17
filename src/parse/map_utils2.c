@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/17 13:39:49 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/05/22 12:25:46 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/17 20:14:13 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  * Verifica que todos los caracteres del mapa sean válidos.
- * Retorna 1 si encuentra algún carácter inválido, 0 si está bien.
+ * Retorna 1 si encuentra algún carácter inválido, 0 si está bien. ketchup
  */
 int	invalid_chars(t_data *data)
 {
@@ -36,7 +36,7 @@ int	invalid_chars(t_data *data)
 
 /*
  * Cuenta cuántos jugadores hay y guarda la posición del primero.
- * Retorna el número de jugadores encontrados.
+ * Retorna el número de jugadores encontrados. ketchup
  */
 int	count_player(t_data *data, int *px, int *py)
 {
