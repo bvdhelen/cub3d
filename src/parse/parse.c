@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/16 19:56:04 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/18 21:44:51 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,13 @@ static int	process_line(char *line, t_data *data, int *map_started)
 	}
 }
 
-static int	read_lines(int fd, t_data *data, t_list **map_lines,
+static int	read_lines(t_data *data, t_list **map_lines,
 		int *map_started)
 {
 	char	*line;
 	int		ret;
 
-	line = get_next_line(fd);
+	line = get_next_line(data->fd);
 	while (line)
 	{
 		charnull_gnl(line);
@@ -109,7 +109,7 @@ static int	read_lines(int fd, t_data *data, t_list **map_lines,
 		if (ret == -1)
 		{
 			free(line);
-			clean_gnl(fd);
+			clean_gnl(data->fd);
 			return (-1);
 		}
 		if (ret == 1)
@@ -118,12 +118,12 @@ static int	read_lines(int fd, t_data *data, t_list **map_lines,
 		}
 		else
 			free(line);
-		line = get_next_line(fd);
+		line = get_next_line(data->fd);
 	}
 	return (0);
 }
 
-int	parse_file(int fd, t_data *data)
+int	parse_file(t_data *data)
 {
 	int		map_started;
 	t_list	*map_lines;
@@ -131,7 +131,7 @@ int	parse_file(int fd, t_data *data)
 
 	map_started = 0;
 	map_lines = NULL;
-	if (read_lines(fd, data, &map_lines, &map_started) == -1)
+	if (read_lines(data, &map_lines, &map_started) == -1)
 	{
 		ft_lstclear(&map_lines, free);
 		return (-1);

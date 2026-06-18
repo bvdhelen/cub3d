@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/12 14:36:25 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/18 18:20:44 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,22 @@ static void	free_textures_path(t_data *data)
 		free(data->west.path);
 }
 
-void free_all(t_data *data)
+//Liberar las imagenes de las texturas
+// static void	free_textures_img(t_data *data)
+// {
+// 	if (data->north.img)
+// 		mlx_destroy_image(data->mlx_connection, data->north.img);
+// 	if (data->south.img)
+// 		mlx_destroy_image(data->mlx_connection, data->south.img);
+// 	if (data->east.img)
+// 		mlx_destroy_image(data->mlx_connection, data->east.img);
+// 	if (data->west.img)
+// 		mlx_destroy_image(data->mlx_connection, data->west.img);
+// }
+
+void	free_all(t_data *data)
 {
-	int i;
+	int	i;
 
 	if (!data)
 		return ;
@@ -38,15 +51,7 @@ void free_all(t_data *data)
 		free(data->map);
 	}
 	free_textures_path(data);
-	// Liberar las imagenes de las texturas
-	// if (data->north.img)
-	// 	mlx_destroy_image(data->mlx_connection, data->north.img);
-	// if (data->south.img)
-	// 	mlx_destroy_image(data->mlx_connection, data->south.img);
-	// if (data->east.img)
-	// 	mlx_destroy_image(data->mlx_connection, data->east.img);
-	// if (data->west.img)
-	// 	mlx_destroy_image(data->mlx_connection, data->west.img);
+	//free_textures_img(data);
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
 	if (data->window)

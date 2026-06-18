@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:41:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/17 20:28:09 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/18 18:42:55 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	overflow_n_checknum(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (!ft_isdigit(s[i]))
-			return (error("invalid element: not a digit\n"));
+		if (ft_isdigit(s[i]))
+			return (0);
 		i++;
 	}
-	return (0);
+	return (error("invalid element: missing number\n"));
 }
 
 int	set_color(char **rgb, t_data *data, char type)
@@ -60,7 +60,6 @@ int	parse_color2(char *info, char type, t_data *data)
 {
 	int		i;
 	char	**rgb;
-	char	*trimmed;
 
 	rgb = ft_split(info, ',');
 	if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
@@ -68,8 +67,7 @@ int	parse_color2(char *info, char type, t_data *data)
 	i = 0;
 	while (rgb[i])
 	{
-		trimmed = skip_spaces(rgb[i]);
-		if (overflow_n_checknum(trimmed))
+		if (overflow_n_checknum(rgb[i]))
 			return (ft_freedp(rgb), -1);
 		i++;
 	}

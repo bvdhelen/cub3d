@@ -15,38 +15,20 @@
 int	main(int argc, char **argv)
 {
 	t_data	*data;
-	int		fd;
-	int		i;
 
 	if (argc != 2)
 	{
 		error_arg();
 		return (1);
 	}
-	i = ft_strlen(argv[1]);
-	if (i < 4 || ft_strncmp(argv[1] + i - 4, ".cub", 4) != 0)
-	{
-		ft_putstr_fd(RED "Error: \n" RESET, 2);
-		ft_putstr_fd("File not valid: insert 'map.cub'\n", 2);
-		return (1);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		ft_putstr_fd(RED "Error: \n" RESET, 2);
-		ft_putstr_fd("Cannot open file\n", 2);
-		return (1);
-	}
-    data = init_data();
+	data = init_data();
 	if (!data)
-	{
-		close(fd);
 		return (1);
-	}
-	data->fd = fd;
-	if (parse_file(fd, data) == -1)
+	if (init_fd(argv, data))
+		return (1);
+	if (parse_file(data) == -1)
 	{
-		close(fd);
+		close(data->fd);
 		free_all(data);
 		return (1);
 	}

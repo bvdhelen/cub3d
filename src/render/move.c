@@ -3,55 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:36:43 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/13 21:38:36 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/18 20:53:00 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//detecta si la posición actual de x e y toca la pared
-int	touch_wall(t_data *data, float pos_x, float pos_y)
-{
-	int	x;
-	int	y;
-
-	if (pos_x < 0 || pos_y < 0)
-		return (1);
-	x = (int)pos_x;
-	y = (int)pos_y;
-	if (y >= data->map_height || x >= data->map_width)
-		return (1);
-	if (data->map[y][x] == '1')
-		return (1);
-	return (0);
-}
-
 //COLISIONES EN 2D CON EL CUADRADO
-void move_vector(t_data *data, t_player *player, float move_x, float move_y)
+void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
 {
-    float new_x = player->x + move_x * MOVE_SPEED;
-    float new_y = player->y + move_y * MOVE_SPEED;
-    float half = (PLAYER_SIZE / 2.0f) / TILE_SIZE;  // medio lado en celdas
+	float	new_x;
+	float	new_y;
+	float	half;
 
-    // Movimiento en X
-    if (!touch_wall(data, new_x - half, player->y - half) &&
-        !touch_wall(data, new_x + half, player->y - half) &&
-        !touch_wall(data, new_x - half, player->y + half) &&
-        !touch_wall(data, new_x + half, player->y + half))
-        player->x = new_x;
-
-    // Movimiento en Y
-    if (!touch_wall(data, player->x - half, new_y - half) &&
-        !touch_wall(data, player->x + half, new_y - half) &&
-        !touch_wall(data, player->x - half, new_y + half) &&
-        !touch_wall(data, player->x + half, new_y + half))
-        player->y = new_y;
+	new_x = player->x + move_x * MOVE_SPEED;
+	new_y = player->y + move_y * MOVE_SPEED;
+	half = (PLAYER_SIZE / 2.0f) / TILE_SIZE;//medio lado en celdas
+	// Movimiento en X
+	if (!touch_wall(data, new_x - half, player->y - half)
+		&& !touch_wall(data, new_x + half, player->y - half)
+		&& !touch_wall(data, new_x - half, player->y + half)
+		&& !touch_wall(data, new_x + half, player->y + half))
+		player->x = new_x;
+	// Movimiento en Y
+	if (!touch_wall(data, player->x - half, new_y - half)
+		&& !touch_wall(data, player->x + half, new_y - half)
+		&& !touch_wall(data, player->x - half, new_y + half)
+		&& !touch_wall(data, player->x + half, new_y + half))
+		player->y = new_y;
 }
 
-static void update_angle(t_player *player)
+static void	update_angle(t_player *player)
 {
 	// Rotación
 	if (player->rotate_left)
@@ -65,43 +50,39 @@ static void update_angle(t_player *player)
 		player->angle += 2 * PI;
 }
 
-static void get_move_direction(t_player *player, float *move_x, float *move_y)
+void	add_move(float *move_x, float *move_y, float next_x, float next_y)
+{
+	*move_x += next_x;
+	*move_y += next_y;
+}
+
+static void	get_move_direction(t_player *player, float *move_x, float *move_y)
 {
 	float	cos_angle;
 	float	sin_angle;
 
 	cos_angle = cosf(player->angle);
 	sin_angle = sinf(player->angle);
-    *move_x = 0;
-    *move_y = 0;
+	*move_x = 0;
+	*move_y = 0;
 	if (player->forward)
-	{
-		*move_x += cos_angle;
-		*move_y += sin_angle;
-	}
+		add_move(move_x, move_y, cos_angle, sin_angle);
 	if (player->back)
-	{
-		*move_x -= cos_angle;
-		*move_y -= sin_angle;
-	}
+		add_move(move_x, move_y, -cos_angle, -sin_angle);
 	if (player->left)
-	{
-		*move_x += sin_angle;
-		*move_y -= cos_angle;
-	}
+		add_move(move_x, move_y, sin_angle, -cos_angle);
 	if (player->right)
-	{
-		*move_x -= sin_angle;
-		*move_y += cos_angle;
-	}
+		add_move(move_x, move_y, -sin_angle, cos_angle);
 }
 
 void	move_player(t_data *data, t_player *player)
 {
-	float 	move_x = 0;
-	float 	move_y = 0;
+	float	move_x;
+	float	move_y;
 	float	len;
 
+	move_x = 0;
+	move_y = 0;
 	update_angle(player);
 	get_move_direction(player, &move_x, &move_y);
 	// Normalizar para que la velocidad sea constante en cualquier dirección

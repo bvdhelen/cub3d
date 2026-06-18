@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/17 20:35:57 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/18 21:47:12 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,15 @@ typedef struct s_ray
 }   t_ray;
 
 
+//init
+t_data	*init_data(void);
+int		init_fd(char **argv, t_data *data);
+int		init_window(t_data *data);
+void	init_image(t_data *data);
+
+//hooks
+void	hooks(t_data *data);
+
 //parse
 int		parse_color1(char *file, t_data *data);
 int		parse_elements(char *file, t_data *data);
@@ -162,16 +171,8 @@ int		build_map_from_list(t_data *data, t_list *map_lines);
 int		invalid_chars(t_data *data);
 int		count_player(t_data *data, int *px, int *py);
 int		parse_map(t_data *data, t_list *map_lines);
-int		parse_file(int fd, t_data *data);
 
-//hooks
-void	hooks(t_data *data);
-
-//init
-t_data	*init_data(void);
-int		init_window(t_data *data);
-void	init_image(t_data *data);
-
+int		parse_file(t_data *data);
 
 
 
@@ -182,15 +183,16 @@ void	init_image(t_data *data);
 
 
 //utils
+int		error(char *message);
+void	error_arg(void);
+
+void	free_all(t_data *data);
+
 void	charnull_gnl(char *s);
 char	*skip_spaces(char *str);
 int		rgb_to_hex(int *rgb);
 float	get_distance(float x, float y);
 
-void	error_arg(void);
-int		error(char *message);
-
-void	free_all(t_data *data);
 
 
 
