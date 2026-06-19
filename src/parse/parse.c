@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/18 21:44:51 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/19 23:37:00 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 /* Debug: Check elements and map*/
 static void	check_parse(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	printf("N -> '%s'\n", data->north.path);
 	printf("S -> '%s'\n", data->south.path);
 	printf("E -> '%s'\n", data->east.path);
 	printf("W -> '%s'\n", data->west.path);
-	printf("F -> '%i' '%i' '%i'\n", data->floor_rgb[0], data->floor_rgb[1], data->floor_rgb[2]);
-	printf("C -> '%i' '%i' '%i'\n", data->ceiling_rgb[0], data->ceiling_rgb[1], data->ceiling_rgb[2]);
-	
-	int i = 0;
-
+	printf("F -> '%i' '%i' '%i'\n", data->floor_rgb[0],
+		data->floor_rgb[1], data->floor_rgb[2]);
+	printf("C -> '%i' '%i' '%i'\n", data->ceiling_rgb[0],
+		data->ceiling_rgb[1], data->ceiling_rgb[2]);
 	printf("MAP (%d x %d):\n", data->map_width, data->map_height);
 	while (data->map[i])
 	{
@@ -90,7 +92,7 @@ static int	process_line(char *line, t_data *data, int *map_started)
 	else
 	{
 		if (is_empty_line(line))
-			return(error("invalid map: empty line inside map\n"));
+			return (error("invalid map: empty line inside map\n"));
 		return (1);
 	}
 }

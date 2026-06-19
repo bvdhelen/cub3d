@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/19 22:53:17 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/19 23:33:20 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ typedef struct s_data
 	int			floor_color;
 	int			ceiling_rgb[3];
 	int			ceiling_color;
-	
-    //paredes
+
+	//paredes
 	t_texture	north;
 	t_texture	south;
 	t_texture	east;
@@ -131,7 +131,7 @@ typedef struct s_data
 	int			west_set;
 
 	int			fd;
-    //jugador
+	//jugador
 	t_player	player;
 
 }	t_data;
@@ -139,22 +139,21 @@ typedef struct s_data
 //DDA
 typedef struct s_ray
 {
-    float   dir_x;
-    float   dir_y;
-    float   side_dist_x;
-    float   side_dist_y;
-    float   delta_dist_x;
-    float   delta_dist_y;
-    int     map_x;
-    int     map_y;
-    int     step_x;
-    int     step_y;
-    int     side;
-    float  perp_wall_dist;
-	float   wall_x;     // coordenada horizontal dentro de la textura (0..1)
-	t_texture *texture; // puntero a la textura a usar
-}   t_ray;
-
+	float		dir_x;
+	float		dir_y;
+	float		side_dist_x;
+	float		side_dist_y;
+	float		delta_dist_x;
+	float		delta_dist_y;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	int			side;
+	float		perp_wall_dist;
+	float		wall_x; // coordenada horizontal dentro de la textura (0..1)
+	t_texture	*texture; // puntero a la textura a usar
+}	t_ray;
 
 //init
 t_data	*init_data(void);
@@ -176,14 +175,6 @@ int		parse_map(t_data *data, t_list *map_lines);
 
 int		parse_file(t_data *data);
 
-
-
-
-
-
-
-
-
 //utils
 int		error(char *message);
 void	error_arg(void);
@@ -194,9 +185,6 @@ void	charnull_gnl(char *s);
 char	*skip_spaces(char *str);
 int		rgb_to_hex(int *rgb);
 float	get_distance(float x, float y);
-
-
-
 
 //render
 void	put_pixel(t_data *data, int x, int y, int color);
@@ -209,18 +197,18 @@ void	draw_map(t_data *data);
 int		touch_wall(t_data *data, float pos_x, float pos_y);
 void	move_player(t_data *data, t_player *player);
 
-void 	draw_wall(t_data *data, int x);
+void	draw_wall(t_data *data, int x);
 int		draw_loop(t_data *data);
 
-void 	draw_all_rays_2d(t_data *data);
-int 	load_textures(t_data *data);
+void	draw_all_rays_2d(t_data *data);
+int		load_textures(t_data *data);
 
 //dda
-void 	init_ray_direction(t_data *data, int x, t_ray *ray);
-void 	init_step_and_side(t_data *data, t_ray *ray);
-int 	dda_loop(t_data *data, t_ray *ray);
-void 	calc_perp_distance(t_ray *ray);
-void 	draw_vertical_stripe(t_data *data, int x, int start, int end, t_ray *ray);
+void	init_ray_direction(t_data *data, int x, t_ray *ray);
+void	init_step_and_side(t_data *data, t_ray *ray);
+int		dda_loop(t_data *data, t_ray *ray);
+void	calc_perp_distance(t_ray *ray);
+void	draw_vertical_stripe(t_data *data, int x, int start, int end, t_ray *ray);
 
 void	get_wall_info(t_data *data, t_ray *ray);
 

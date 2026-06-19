@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/19 22:05:55 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/19 23:34:47 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	free_textures(t_data *data)
 		mlx_destroy_image(data->mlx_connection, data->west.img);
 }
 
-void free_all(t_data *data)
+void	free_all(t_data *data)
 {
-	int i;
+	int	i;
 
 	if (!data)
 		return ;
