@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:48:31 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/13 21:25:34 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/19 22:50:40 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,39 @@ void calc_perp_distance(t_ray *ray)
 }
 
 // 5. draw_vertical_stripe (dibuja techo, pared, suelo)
-void draw_vertical_stripe(t_data *data, int x, int start, int end)
+void draw_vertical_stripe(t_data *data, int x, int start, int end, t_ray *ray)
 {
-    int y = 0;
+    int     y;
+    int     tex_x;
+    int     tex_y;
+    int     color;
+    float   step;
+    float   tex_pos;
+
+    // Calcular columna en la textura
+    tex_x = (int)(ray->wall_x * (ray->texture->width - 1));
+    if (tex_x < 0) tex_x = 0;
+    if (tex_x >= ray->texture->width) tex_x = ray->texture->width - 1;
+
+    // Paso vertical (avance en la textura por cada píxel de la pared)
+    step = (float)ray->texture->height / (float)(end - start);
+    tex_pos = 0.0f;
+
+    y = 0;
     while (y < start)
         put_pixel(data, x, y++, data->ceiling_color);
+
     while (y < end)
-        put_pixel(data, x, y++, 0x808080);   // aquí luego vendrá textura
+    {
+        tex_y = (int)tex_pos;
+        if (tex_y >= ray->texture->height)
+            tex_y = ray->texture->height - 1;
+        color = *(int *)(ray->texture->addr + (tex_y * ray->texture->line_len
+                + tex_x * (ray->texture->bpp / 8)));
+        put_pixel(data, x, y++, color);
+        tex_pos += step;
+    }
+
     while (y < WIN_HEIGHT)
         put_pixel(data, x, y++, data->floor_color);
 }

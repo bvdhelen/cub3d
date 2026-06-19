@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eldiaz-c <eldiaz-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/25 00:39:44 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/06/10 20:36:06 by eldiaz-c         ###   ########.fr       */
+/*   Updated: 2026/06/19 22:06:15 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	charnull_gnl(char *s)//revisar nombre
+void	charnull_gnl(char *s)
 {
 	int	i;
 

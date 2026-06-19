@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/18 21:47:12 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/19 22:53:17 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ typedef struct s_ray
     int     step_y;
     int     side;
     float  perp_wall_dist;
+	float   wall_x;     // coordenada horizontal dentro de la textura (0..1)
+	t_texture *texture; // puntero a la textura a usar
 }   t_ray;
 
 
@@ -218,6 +220,8 @@ void 	init_ray_direction(t_data *data, int x, t_ray *ray);
 void 	init_step_and_side(t_data *data, t_ray *ray);
 int 	dda_loop(t_data *data, t_ray *ray);
 void 	calc_perp_distance(t_ray *ray);
-void 	draw_vertical_stripe(t_data *data, int x, int start, int end);
+void 	draw_vertical_stripe(t_data *data, int x, int start, int end, t_ray *ray);
+
+void	get_wall_info(t_data *data, t_ray *ray);
 
 #endif

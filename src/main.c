@@ -23,6 +23,7 @@ int	main(int argc, char **argv)
 	}
 	data = init_data();
 	if (!data)
+		//close (fd); ???
 		return (1);
 	if (init_fd(argv, data))
 		return (1);
@@ -35,6 +36,11 @@ int	main(int argc, char **argv)
 	if (!init_window(data))
 		return (1);
 	init_image(data);
+	if (load_textures(data) == -1)
+	{
+		free_all(data);
+		return (1);
+	}
 	hooks(data);
 	mlx_loop_hook(data->mlx_connection, draw_loop, data);
 	mlx_loop(data->mlx_connection);

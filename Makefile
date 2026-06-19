@@ -3,7 +3,7 @@ NAME = cub3D
 
 # Compilador y banderas de compilación
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -O3 #-g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -O3 -g3 -fsanitize=address
 INCLUDES = -I./includes -Imlx_linux -I./includes/aux/libft -I./includes/aux/gnl
 
 # Linkeo
@@ -46,6 +46,7 @@ SRC =	src/main.c \
 		src/parse/parse_elements.c \
 		src/parse/map_utils1.c \
 		src/parse/map_utils2.c \
+		src/parse/load_textures.c \
 		src/init/init.c \
 		src/hooks/hooks.c \
 		src/render/drawing.c \

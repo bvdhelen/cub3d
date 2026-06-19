@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 13:14:54 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/18 18:20:44 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/19 22:05:55 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	free_textures_path(t_data *data)
+static void	free_textures(t_data *data)
 {
 	if (data->north.path)
 		free(data->north.path);
@@ -22,24 +22,19 @@ static void	free_textures_path(t_data *data)
 		free(data->east.path);
 	if (data->west.path)
 		free(data->west.path);
+	if (data->north.img)
+		mlx_destroy_image(data->mlx_connection, data->north.img);
+	if (data->south.img)
+		mlx_destroy_image(data->mlx_connection, data->south.img);
+	if (data->east.img)
+		mlx_destroy_image(data->mlx_connection, data->east.img);
+	if (data->west.img)
+		mlx_destroy_image(data->mlx_connection, data->west.img);
 }
 
-//Liberar las imagenes de las texturas
-// static void	free_textures_img(t_data *data)
-// {
-// 	if (data->north.img)
-// 		mlx_destroy_image(data->mlx_connection, data->north.img);
-// 	if (data->south.img)
-// 		mlx_destroy_image(data->mlx_connection, data->south.img);
-// 	if (data->east.img)
-// 		mlx_destroy_image(data->mlx_connection, data->east.img);
-// 	if (data->west.img)
-// 		mlx_destroy_image(data->mlx_connection, data->west.img);
-// }
-
-void	free_all(t_data *data)
+void free_all(t_data *data)
 {
-	int	i;
+	int i;
 
 	if (!data)
 		return ;
@@ -50,8 +45,7 @@ void	free_all(t_data *data)
 			free(data->map[i++]);
 		free(data->map);
 	}
-	free_textures_path(data);
-	//free_textures_img(data);
+	free_textures(data);
 	if (data->imagen.img)
 		mlx_destroy_image(data->mlx_connection, data->imagen.img);
 	if (data->window)

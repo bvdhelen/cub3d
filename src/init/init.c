@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 14:07:26 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/18 21:50:40 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/19 23:21:59 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ int	init_fd(char **argv, t_data *data)
 	i = ft_strlen(argv[1]);
 	if (i < 4 || ft_strncmp(argv[1] + i - 4, ".cub", 4) != 0)
 	{
-		ft_putstr_fd(RED "Error: \n" RESET, 2);
-		ft_putstr_fd("File not valid: insert 'map.cub'\n", 2);
+		ft_putstr_fd(RED "Error: " RESET, 2);
+		ft_putstr_fd("file not valid: insert 'map.cub'\n", 2);
 		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd(RED "Error: \n" RESET, 2);
-		ft_putstr_fd("Cannot open file\n", 2);
+		ft_putstr_fd(RED "Error: " RESET, 2);
+		ft_putstr_fd("cannot open file\n", 2);
 		return (1);
 	}
 	data->fd = fd;
