@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/19 23:33:20 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/20 17:39:41 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 
 // Velocidades del jugador
 # define MOVE_SPEED   0.12f   // CELDAS por frame
-# define ROTATE_SPEED  0.03f  // radianes por frame
+# define ROTATE_SPEED  0.05f  // radianes por frame
 
 // pi y campo de visión (field of view) de 60°, FOV es pi/3
 # define PI 3.141592653589793
@@ -208,7 +208,7 @@ void	init_ray_direction(t_data *data, int x, t_ray *ray);
 void	init_step_and_side(t_data *data, t_ray *ray);
 int		dda_loop(t_data *data, t_ray *ray);
 void	calc_perp_distance(t_ray *ray);
-void	draw_vertical_stripe(t_data *data, int x, int start, int end, t_ray *ray);
+void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray);
 
 void	get_wall_info(t_data *data, t_ray *ray);
 

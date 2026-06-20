@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:23:33 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/18 21:03:02 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/20 17:39:35 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,72 +69,110 @@ void	draw_map(t_data *data)
 	}
 }
 
+// Bordes horizontales (arriba y abajo)
+void	draw_h_border(t_data *data, int y, int x_start, int x_end, int color)
+{
+	int	x;
+
+	if (y < 0 || y >= WIN_HEIGHT)
+		return ;
+	x = x_start;
+	while (x <= x_end)
+	{
+		if (x >= 0 && x < WIN_WIDTH)
+			put_pixel(data, x, y, color);
+		x++;
+	}
+}
+
+// Bordes verticales (izquierda y derecha, sin repetir esquinas)
+void	draw_v_border(t_data *data, int x, int y_start, int y_end, int color)
+{
+	int	y;
+
+	if (x < 0 || x >= WIN_WIDTH)
+		return ;
+	y = y_start;
+	while (y <= y_end)
+	{
+		if (y >= 0 && y < WIN_HEIGHT)
+			put_pixel(data, x, y, color);
+		y++;
+	}
+}
+
 void	draw_player(t_data *data, float cell_x, float cell_y, int color)
 {
-	int	px = (int)(cell_x * TILE_SIZE);
-	int	py = (int)(cell_y * TILE_SIZE);
-	int	half = PLAYER_SIZE / 2;
-	int	start_x = px - half;
-	int	start_y = py - half;
-	int	end_x = px + half;
-	int	end_y = py + half;
+	int	px;
+	int	py;
+	int	half;
 
-	// Bordes horizontales (arriba y abajo)
-	for (int x = start_x; x <= end_x; x++)
+	px = (int)(cell_x * TILE_SIZE);
+	py = (int)(cell_y * TILE_SIZE);
+	half = PLAYER_SIZE / 2;
+	draw_h_border(data, py - half, px - half, px + half, color);
+	draw_h_border(data, py + half, px - half, px + half, color);
+	draw_v_border(data, px - half, py - half + 1, py + half - 1, color);
+	draw_v_border(data, px + half, py - half + 1, py + half - 1, color);
+}
+
+static void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y)
+{
+	float	ray_x;
+	float	ray_y;
+	int		steps;
+	int		sx;
+	int		sy;
+	int		hit_x;
+	int		hit_y;
+
+	ray_x = data->player.x;
+	ray_y = data->player.y;
+	steps = 0;
+	while (!touch_wall(data, ray_x, ray_y) && steps < 200)
 	{
-		if (x >= 0 && x < WIN_WIDTH && start_y >= 0 && start_y < WIN_HEIGHT)
-			put_pixel(data, x, start_y, color);
-		if (x >= 0 && x < WIN_WIDTH && end_y >= 0 && end_y < WIN_HEIGHT)
-			put_pixel(data, x, end_y, color);
+		sx = (int)(ray_x * TILE_SIZE);
+		sy = (int)(ray_y * TILE_SIZE);
+		if (sx >= 0 && sx < WIN_WIDTH && sy >= 0 && sy < WIN_HEIGHT)
+			put_pixel(data, sx, sy, 0x00FF00);
+		ray_x += dir_x * 0.2f;
+		ray_y += dir_y * 0.2f;
+		steps++;
 	}
-	// Bordes verticales (izquierda y derecha, sin repetir esquinas)
-	for (int y = start_y + 1; y < end_y; y++)
+	if (steps < 200)
 	{
-		if (start_x >= 0 && start_x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-			put_pixel(data, start_x, y, color);
-		if (end_x >= 0 && end_x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT)
-			put_pixel(data, end_x, y, color);
+		hit_x = (int)(ray_x * TILE_SIZE);
+		hit_y = (int)(ray_y * TILE_SIZE);
+		put_pixel(data, hit_x, hit_y, 0xFF0000);
 	}
 }
 
 /* Dibuja en 2D todos los rayos */
+// Dibujamos un rayo cada 2 píxeles de ancho de pantalla
+// Avanzar mientras no toque pared y no salga del mapa (máximo 200 pasos)
+// Punto de impacto (rojo)
 void	draw_all_rays_2d(t_data *data)
 {
-	t_player	*p = &data->player;
-	float		cos_angle = cosf(p->angle);
-	float		sin_angle = sinf(p->angle);
-	float		plane_x = -sin_angle * 0.66f;
-	float		plane_y = cos_angle * 0.66f;
-	float		ray_x, ray_y;
-	int			steps;
+	float	cos_angle;
+	float	sin_angle;
+	float	plane_x;
+	float	plane_y;
+	int		x;
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
 
-	// Dibujamos un rayo cada 2 píxeles de ancho de pantalla
-	for (int x = 0; x < WIN_WIDTH; x += 2)
+	cos_angle = cosf(data->player.angle);
+	sin_angle = sinf(data->player.angle);
+	plane_x = -sin_angle * 0.66f;
+	plane_y = cos_angle * 0.66f;
+	x = 0;
+	while (x < WIN_WIDTH)
 	{
-		float	camera_x = 2.0f * x / WIN_WIDTH - 1.0f;
-		float	ray_dir_x = cos_angle + plane_x * camera_x;
-		float	ray_dir_y = sin_angle + plane_y * camera_x;
-
-		ray_x = p->x;
-		ray_y = p->y;
-		steps = 0;
-		// Avanzar mientras no toque pared y no salga del mapa (máximo 200 pasos)
-		while (!touch_wall(data, ray_x, ray_y) && steps < 200)
-		{
-			int	sx = (int)(ray_x * TILE_SIZE);
-			int	sy = (int)(ray_y * TILE_SIZE);
-			if (sx >= 0 && sx < WIN_WIDTH && sy >= 0 && sy < WIN_HEIGHT)
-				put_pixel(data, sx, sy, 0x00FF00);
-			ray_x += ray_dir_x * 0.2f;
-			ray_y += ray_dir_y * 0.2f;
-			steps++;
-		}
-		// Punto de impacto (rojo)
-		if (steps < 200)
-		{
-			int	hit_x = (int)(ray_x * TILE_SIZE);
-			int	hit_y = (int)(ray_y * TILE_SIZE);
-			put_pixel(data, hit_x, hit_y, 0xFF0000);
-		}
+		camera_x = 2.0f * x / WIN_WIDTH - 1.0f;
+		ray_dir_x = cos_angle + plane_x * camera_x;
+		ray_dir_y = sin_angle + plane_y * camera_x;
+		draw_single_ray_2d(data, ray_dir_x, ray_dir_y);
+		x += 2;
 	}
-}	
+}

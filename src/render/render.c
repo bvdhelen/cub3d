@@ -6,19 +6,23 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:35:58 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/19 22:53:47 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/20 17:27:33 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+/* Calcular punto exacto de impacto (coordenadas dentro de la celda)
+	if (ray->side == 0) // impacto vertical (Este u Oeste)
+	else // impacto horizontal (Norte o Sur)
+   Y al final invertir wall_x para evitar espejado (según la dirección)
+*/
 void	get_wall_info(t_data *data, t_ray *ray)
 {
 	float	hit_x;
 	float	hit_y;
 
-	// Calcular punto exacto de impacto (coordenadas dentro de la celda)
-	if (ray->side == 0) // impacto vertical (Este u Oeste)
+	if (ray->side == 0)
 	{
 		hit_y = data->player.y + ray->perp_wall_dist * ray->dir_y;
 		ray->wall_x = hit_y - floor(hit_y);
@@ -27,7 +31,7 @@ void	get_wall_info(t_data *data, t_ray *ray)
 		else
 			ray->texture = &data->west;
 	}
-	else // impacto horizontal (Norte o Sur)
+	else
 	{
 		hit_x = data->player.x + ray->perp_wall_dist * ray->dir_x;
 		ray->wall_x = hit_x - floor(hit_x);
@@ -36,9 +40,8 @@ void	get_wall_info(t_data *data, t_ray *ray)
 		else
 			ray->texture = &data->north;
 	}
-	// Invertir wall_x para evitar espejado (según la dirección)
-	if ((ray->side == 0 && ray->dir_x < 0) ||
-		(ray->side == 1 && ray->dir_y > 0))
+	if ((ray->side == 0 && ray->dir_x < 0)
+		|| (ray->side == 1 && ray->dir_y > 0))
 		ray->wall_x = 1.0f - ray->wall_x;
 }
 
@@ -76,7 +79,7 @@ void	draw_3d(t_data *data, int x)
 	draw_end = line_height / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	draw_vertical_stripe(data, x, draw_start, draw_end, &ray);
+	draw_vertical_line(data, x, draw_start, draw_end, &ray);
 }
 
 int	draw_loop(t_data *data)
