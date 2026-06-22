@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/20 17:39:41 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/22 19:37:45 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ void	hooks(t_data *data);
 
 //parse
 int		parse_color1(char *file, t_data *data);
+int		rgb_to_hex(int *rgb);
 int		parse_elements(char *file, t_data *data);
 
 int		build_map_from_list(t_data *data, t_list *map_lines);
@@ -182,9 +183,10 @@ void	error_arg(void);
 void	free_all(t_data *data);
 
 void	charnull_gnl(char *s);
+void	clean_gnl(int fd);
 char	*skip_spaces(char *str);
-int		rgb_to_hex(int *rgb);
 float	get_distance(float x, float y);
+void	check_parse(t_data *data);
 
 //render
 void	put_pixel(t_data *data, int x, int y, int color);

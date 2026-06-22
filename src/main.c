@@ -17,13 +17,10 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	if (argc != 2)
-	{
-		error_arg();
-		return (1);
-	}
+		return (error_arg(), 1);
 	data = init_data();
 	if (!data)
-		//close (fd); ???
+		//close (fd); ??? ;; ketchup -> fd se inicia ahora más abajo en init fd
 		return (1);
 	if (init_fd(argv, data))
 		return (1);
@@ -37,10 +34,7 @@ int	main(int argc, char **argv)
 		return (1);
 	init_image(data);
 	if (load_textures(data) == -1)
-	{
-		free_all(data);
-		return (1);
-	}
+		return (free_all(data), 1);
 	hooks(data);
 	mlx_loop_hook(data->mlx_connection, draw_loop, data);
 	mlx_loop(data->mlx_connection);

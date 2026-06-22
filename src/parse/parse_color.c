@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:41:32 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/18 18:42:55 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/22 19:36:01 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,12 @@ int	parse_color1(char *file, t_data *data)
 	if (parse_color2(info, type, data))
 		return (-1);
 	return (0);
+}
+
+int	rgb_to_hex(int *rgb)
+{
+	int	hex;
+
+	hex = (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	return (hex);
 }
