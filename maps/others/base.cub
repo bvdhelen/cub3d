@@ -1,10 +1,10 @@
-F 1,100,1
-C 225,53,58
+F 59, 64, 24
+C 21, 30, 24
 
-NO ./textures/north.xpm
-SO ./textures/south.xpm
-WE ./textures/west.xpm
-EA ./textures/east.xpm
+NO ./textures/mushrooms/mushroom_forest00.xpm
+SO ./textures/mushrooms/mushroom_forest01.xpm
+WE ./textures/mushrooms/mushroom_forest02.xpm
+EA ./textures/mushrooms/mushroom_forest03.xpm
 
 
 111111111111111111

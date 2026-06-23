@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/22 19:37:45 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/23 20:59:09 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@
 # define RESET		"\033[0m"
 
 // Definir el ancho y alto de la ventana
-# define WIN_WIDTH 1920 //1500 //1920
-# define WIN_HEIGHT 1080 //800 //1080
+# define WIN_WIDTH 1800//1920 //1500 //1920
+# define WIN_HEIGHT 1000//1080 //800 //1080
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
@@ -210,7 +210,8 @@ void	init_ray_direction(t_data *data, int x, t_ray *ray);
 void	init_step_and_side(t_data *data, t_ray *ray);
 int		dda_loop(t_data *data, t_ray *ray);
 void	calc_perp_distance(t_ray *ray);
-void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray);
+//void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray);
+void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int line_height, int real_start);
 
 void	get_wall_info(t_data *data, t_ray *ray);
 

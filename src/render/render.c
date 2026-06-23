@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:35:58 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/20 17:27:33 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/23 18:56:01 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	draw_3d(t_data *data, int x)
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	int 	real_start;
 
 	init_ray_direction(data, x, &ray);
 	init_step_and_side(data, &ray);
@@ -72,14 +73,28 @@ void	draw_3d(t_data *data, int x)
 		return ;
 	calc_perp_distance(&ray);
 	get_wall_info(data, &ray);
+	// line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
+	// draw_start = -line_height / 2 + WIN_HEIGHT / 2;
+	// if (draw_start < 0)
+	// 	draw_start = 0;
+	// draw_end = line_height / 2 + WIN_HEIGHT / 2;
+	// if (draw_end >= WIN_HEIGHT)
+	// 	draw_end = WIN_HEIGHT - 1;
+	// draw_vertical_line(data, x, draw_start, draw_end, &ray);
+
 	line_height = (int)(WIN_HEIGHT / ray.perp_wall_dist);
-	draw_start = -line_height / 2 + WIN_HEIGHT / 2;
+
+	real_start = -line_height / 2 + WIN_HEIGHT / 2;
+
+	draw_start = real_start;
+	draw_end = line_height / 2 + WIN_HEIGHT / 2;
+
 	if (draw_start < 0)
 		draw_start = 0;
-	draw_end = line_height / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	draw_vertical_line(data, x, draw_start, draw_end, &ray);
+
+	draw_vertical_line(data, x, draw_start, draw_end, &ray, line_height, real_start);
 }
 
 int	draw_loop(t_data *data)
