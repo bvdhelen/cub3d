@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/24 20:08:47 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 20:47:38 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ int		count_player(t_data *data, int *px, int *py);
 int		parse_map(t_data *data, t_list *map_lines);
 
 int		parse_file(t_data *data);
+int		load_textures(t_data *data);
 
 //utils
 int		error(char *message);
@@ -239,22 +240,22 @@ void	check_parse(t_data *data);
 //render
 void	put_pixel(t_data *data, int x, int y, int color);
 int		frame_limit(void);
-
-void	clear_image(t_data *data);
-void	draw_player(t_data *data, float x, float y, int color);
-void	draw_square(t_data *data, int x, int y, int color);
-void	draw_map(t_data *data);
 int		touch_wall(t_data *data, float pos_x, float pos_y);
+
+void	draw_minimap(t_data *data);
 void	move_player(t_data *data, t_player *player);
-
-void	draw_wall(t_data *data, int x);
-
-int		load_textures(t_data *data);
-
 int		draw_loop(t_data *data);
 
-//minimap
-void	draw_minimap(t_data *data);
+//drawing
+void	draw_h_border(t_data *data, t_border b);
+void	draw_v_border(t_data *data, t_border b);
+void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y);
+
+void	clear_image(t_data *data);
+void	draw_square(t_data *data, int x, int y, int color);
+void	draw_map(t_data *data);
+void	draw_player(t_data *data, float x, float y, int color);
+void	draw_all_rays_2d(t_data *data);
 
 //dda
 void	init_ray_direction(t_data *data, int x, t_ray *ray);
@@ -262,12 +263,5 @@ void	init_step_and_side(t_data *data, t_ray *ray);
 int		dda_loop(t_data *data, t_ray *ray);
 void	calc_perp_distance(t_ray *ray);
 void	draw_vertical_line(t_data *data, t_wall *wall, t_ray *ray);
-
-//drawing??
-void	draw_h_border(t_data *data, t_border b);
-void	draw_v_border(t_data *data, t_border b);
-void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y);
-void	draw_all_rays_2d(t_data *data);
-void	get_wall_info(t_data *data, t_ray *ray);
 
 #endif
