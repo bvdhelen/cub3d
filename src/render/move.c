@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:36:43 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/20 17:23:26 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 16:27:11 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,55 +95,3 @@ void	move_player(t_data *data, t_player *player)
 	}
 	move_vector(data, player, move_x, move_y);
 }
-
-// COLISIONES EN 2D CON RADIO
-// void	move_vector(t_data *data, t_player *player, float move_x, float move_y)
-// {
-// 	float	new_x;
-// 	float	new_y;
-// 	int		angle_step;
-// 	float	angle;
-// 	float	check_x;
-// 	float	check_y;
-// 	int		colision_x = 0;
-// 	int		colision_y = 0;
-
-// 	new_x = player->x + move_x * MOVE_SPEED;
-// 	new_y = player->y + move_y * MOVE_SPEED;
-// 	// Comprobar colisión circular: muestrear puntos alrededor del perímetro
-// 	angle_step = 16;  // número de puntos a comprobar (cuantos más, más preciso)
-
-// 	// Movimiento en X (horizontal)
-// 	angle = 0;
-// 	while (angle < 2 * PI)
-// 	{
-// 		check_x = new_x + cosf(angle) * PLAYER_RADIUS_CELL;
-// 		check_y = player->y + sinf(angle) * PLAYER_RADIUS_CELL;
-// 		if (touch_wall(data, check_x, check_y))
-// 		{
-// 			colision_x = 1;
-// 			break ;
-// 		}
-// 		angle += 2 * PI / angle_step;
-// 	}
-// 	// Sin colisión, actualizar posición
-// 	if (!colision_x)
-// 		player->x = new_x;
-
-// 	// Movimiento en Y (vertical)
-// 	angle = 0;
-// 	while (angle < 2 * PI)
-// 	{
-// 		check_x = player->x + cosf(angle) * PLAYER_RADIUS_CELL;
-// 		check_y = new_y + sinf(angle) * PLAYER_RADIUS_CELL;
-// 		if (touch_wall(data, check_x, check_y))
-// 		{
-// 			colision_y = 1;
-// 			break ;
-// 		}
-// 		angle += 2 * PI / angle_step;
-// 	}
-// 	// Sin colisión, actualizar posición
-// 	if (!colision_y)
-// 		player->y = new_y;
-// }

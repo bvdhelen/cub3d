@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 22:09:59 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/06/24 16:04:17 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/24 16:28:49 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,15 @@ void	draw_minirays(t_data *data)
 
 	cos_angle = cosf(data->player.angle);
 	sin_angle = sinf(data->player.angle);
-
 	plane_x = -sin_angle * 0.66f;
 	plane_y = cos_angle * 0.66f;
-
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		camera_x = 2.0f * x / WIN_WIDTH - 1.0f;
-
 		ray_dir_x = cos_angle + plane_x * camera_x;
 		ray_dir_y = sin_angle + plane_y * camera_x;
-
 		draw_single_miniray(data, ray_dir_x, ray_dir_y);
-
 		x += 20;
 	}
 }
@@ -109,7 +104,7 @@ void	draw_minimap(t_data *data)
 				draw_minisquare(data,
 					MINIMAP_X + x * MINIMAP_SCALE,
 					MINIMAP_Y + y * MINIMAP_SCALE,
-					0xFFAACC);//FF0099);
+					0xFFAACC);
 			x++;
 		}
 		y++;

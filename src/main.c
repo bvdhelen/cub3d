@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 		return (error_arg(), 1);
 	data = init_data();
 	if (!data)
-		//close (fd); ??? ;; ketchup -> fd se inicia ahora más abajo en init fd
 		return (1);
 	if (init_fd(argv, data))
 		return (1);

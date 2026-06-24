@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/24 13:12:45 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/24 16:21:07 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 
 // Velocidades del jugador
 # define MOVE_SPEED   0.12f   // CELDAS por frame
-# define ROTATE_SPEED  0.05f  // radianes por frame
+# define ROTATE_SPEED  0.07f  // radianes por frame
 
 // pi y campo de visión (field of view) de 60°, FOV es pi/3
 # define PI 3.141592653589793

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:48:31 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/23 18:54:59 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/24 16:30:36 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,42 +100,6 @@ void	calc_perp_distance(t_ray *ray)
 }
 
 // 5. draw_vertical_line (dibuja techo, pared, suelo)
-// Calcular columna en la textura
-// Paso vertical (avance en la textura por cada píxel de la pared)
-// void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray)
-// {
-// 	int		y;
-// 	int		tex_x;
-// 	int		tex_y;
-// 	int		color;
-// 	float	step;
-// 	float	tex_pos;
-
-// 	tex_x = (int)(ray->wall_x * (ray->texture->width - 1));
-// 	if (tex_x < 0)
-// 		tex_x = 0;
-// 	if (tex_x >= ray->texture->width)
-// 		tex_x = ray->texture->width - 1;
-// 	step = (float)ray->texture->height / (float)(end - start);
-// 	tex_pos = 0.0f;
-// 	y = 0;
-// 	while (y < start)
-// 		put_pixel(data, x, y++, data->ceiling_color);
-// 	while (y < end)
-// 	{
-// 		tex_y = (int)tex_pos;
-// 		if (tex_y >= ray->texture->height)
-// 			tex_y = ray->texture->height - 1;
-// 		color = *(int *)(ray->texture->addr
-// 				+ (tex_y * ray->texture->line_len + tex_x
-// 					* (ray->texture->bpp / 8)));
-// 		put_pixel(data, x, y++, color);
-// 		tex_pos += step;
-// 	}
-// 	while (y < WIN_HEIGHT)
-// 		put_pixel(data, x, y++, data->floor_color);
-// }
-
 void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int line_height, int real_start)
 {
 	int		y;
@@ -150,12 +114,8 @@ void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int
 		tex_x = 0;
 	if (tex_x >= ray->texture->width)
 		tex_x = ray->texture->width - 1;
-	// step = (float)ray->texture->height / (float)(end - start);
-	// tex_pos = 0.0f;
-
 	step = (float)ray->texture->height / (float)line_height;
 	tex_pos = (start - real_start) * step;
-	
 	y = 0;
 	while (y < start)
 		put_pixel(data, x, y++, data->ceiling_color);
