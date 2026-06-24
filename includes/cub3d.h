@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/23 20:59:09 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/24 13:12:45 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@
 // Definir el ancho y alto de la ventana
 # define WIN_WIDTH 1800//1920 //1500 //1920
 # define WIN_HEIGHT 1000//1080 //800 //1080
+
+//minimap
+#define MINIMAP_X 20
+#define MINIMAP_Y 20
+#define MINIMAP_SCALE 8
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
@@ -204,6 +209,9 @@ int		draw_loop(t_data *data);
 
 void	draw_all_rays_2d(t_data *data);
 int		load_textures(t_data *data);
+
+//minimap
+void	draw_minimap(t_data *data);
 
 //dda
 void	init_ray_direction(t_data *data, int x, t_ray *ray);

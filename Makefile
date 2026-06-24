@@ -53,6 +53,7 @@ SRC =	src/main.c \
 		src/render/move.c \
 		src/render/render.c \
 		src/render/render_utils.c \
+		src/render/minimap.c \
 		src/render/dda.c \
 
 OBJ = $(SRC:src/%.c=$(OBJ_DIR)/%.o)

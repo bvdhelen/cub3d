@@ -6,7 +6,7 @@
 /*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 20:35:58 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/23 18:56:01 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/23 22:09:29 by ptrapero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int	draw_loop(t_data *data)
 			draw_3d(data, i);
 			i++;
 		}
+		draw_minimap(data);
 	}
 	mlx_put_image_to_window(data->mlx_connection, data->window,
 		data->imagen.img, 0, 0);
