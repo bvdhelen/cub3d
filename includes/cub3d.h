@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/24 17:50:59 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 19:56:43 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@
 # define WIN_HEIGHT 1000//1080 //800 //1080
 
 //minimap
-#define MINIMAP_X 20
-#define MINIMAP_Y 20
-#define MINIMAP_SCALE 8
+# define MINIMAP_X 20
+# define MINIMAP_Y 20
+# define MINIMAP_SCALE 8
 
 // Definir el tamaño de celda y de jugador
 # define TILE_SIZE 22
@@ -146,10 +146,10 @@ typedef struct s_ray
 {
 	float		dir_x;
 	float		dir_y;
-	float		side_dist_x;
-	float		side_dist_y;
-	float		delta_dist_x;
-	float		delta_dist_y;
+	float		side_dx;
+	float		side_dy;
+	float		delta_dx;
+	float		delta_dy;
 	int			map_x;
 	int			map_y;
 	int			step_x;
@@ -191,6 +191,14 @@ typedef struct s_texdraw
 	float	step;
 	float	tex_pos;
 }	t_texdraw;
+
+typedef struct s_border
+{
+	int	start;
+	int	end;
+	int	pos;
+	int	color;
+}	t_border;
 
 //init
 t_data	*init_data(void);
@@ -251,11 +259,10 @@ void	init_step_and_side(t_data *data, t_ray *ray);
 int		dda_loop(t_data *data, t_ray *ray);
 void	calc_perp_distance(t_ray *ray);
 void	draw_vertical_line(t_data *data, t_wall *wall, t_ray *ray);
-//void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int line_height, int real_start);
 
 //drawing??
-void	draw_h_border(t_data *data, int y, int x_start, int x_end, int color);
-void	draw_v_border(t_data *data, int x, int y_start, int y_end, int color);
+void	draw_h_border(t_data *data, t_border b);
+void	draw_v_border(t_data *data, t_border b);
 void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y);
 
 void	get_wall_info(t_data *data, t_ray *ray);

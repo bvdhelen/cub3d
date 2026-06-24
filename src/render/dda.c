@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:48:31 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/24 17:57:00 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 19:58:14 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,32 +35,29 @@ void	init_ray_direction(t_data *data, int x, t_ray *ray)
 // 2. init_step_and_side (calcula steps y side_dist iniciales)
 void	init_step_and_side(t_data *data, t_ray *ray)
 {
-	float	delta_x;
-	float	delta_y;
-
-	delta_x = fabs(1.0 / ray->dir_x);
-	delta_y = fabs(1.0 / ray->dir_y);
-	ray->delta_dist_x = delta_x;
-	ray->delta_dist_y = delta_y;
+	ray->delta_dx = fabs(1.0 / ray->dir_x);
+	ray->delta_dy = fabs(1.0 / ray->dir_y);
 	if (ray->dir_x < 0)
 	{
 		ray->step_x = -1;
-		ray->side_dist_x = (data->player.x - ray->map_x) * delta_x;
+		ray->side_dx = (data->player.x - ray->map_x) * fabs(1.0 / ray->dir_x);
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - data->player.x) * delta_x;
+		ray->side_dx = (ray->map_x + 1.0 - data->player.x)
+			* fabs(1.0 / ray->dir_x);
 	}
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
-		ray->side_dist_y = (data->player.y - ray->map_y) * delta_y;
+		ray->side_dy = (data->player.y - ray->map_y) * fabs(1.0 / ray->dir_y);
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - data->player.y) * delta_y;
+		ray->side_dy = (ray->map_y + 1.0 - data->player.y)
+			* fabs(1.0 / ray->dir_y);
 	}
 }
 
@@ -70,15 +67,15 @@ int	dda_loop(t_data *data, t_ray *ray)
 {
 	while (1)
 	{
-		if (ray->side_dist_x < ray->side_dist_y)
+		if (ray->side_dx < ray->side_dy)
 		{
-			ray->side_dist_x += ray->delta_dist_x;
+			ray->side_dx += ray->delta_dx;
 			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->side_dist_y += ray->delta_dist_y;
+			ray->side_dy += ray->delta_dy;
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
@@ -94,9 +91,9 @@ int	dda_loop(t_data *data, t_ray *ray)
 void	calc_perp_distance(t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
+		ray->perp_wall_dist = (ray->side_dx - ray->delta_dx);
 	else
-		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
+		ray->perp_wall_dist = (ray->side_dy - ray->delta_dy);
 }
 
 // 5. draw_vertical_line (dibuja techo, pared, suelo)

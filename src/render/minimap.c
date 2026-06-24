@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/23 22:09:59 by ptrapero          #+#    #+#             */
-/*   Updated: 2026/06/24 16:28:49 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 19:35:10 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,20 @@ void	draw_single_miniray(t_data *data, float dir_x, float dir_y)
 
 void	draw_minirays(t_data *data)
 {
-	float	cos_angle;
-	float	sin_angle;
-	float	plane_x;
-	float	plane_y;
-	float	camera_x;
-	float	ray_dir_x;
-	float	ray_dir_y;
-	int		x;
+	t_ray2d	r;
 
-	cos_angle = cosf(data->player.angle);
-	sin_angle = sinf(data->player.angle);
-	plane_x = -sin_angle * 0.66f;
-	plane_y = cos_angle * 0.66f;
-	x = 0;
-	while (x < WIN_WIDTH)
+	r.cos_angle = cosf(data->player.angle);
+	r.sin_angle = sinf(data->player.angle);
+	r.plane_x = -r.sin_angle * 0.66f;
+	r.plane_y = r.cos_angle * 0.66f;
+	r.x = 0;
+	while (r.x < WIN_WIDTH)
 	{
-		camera_x = 2.0f * x / WIN_WIDTH - 1.0f;
-		ray_dir_x = cos_angle + plane_x * camera_x;
-		ray_dir_y = sin_angle + plane_y * camera_x;
-		draw_single_miniray(data, ray_dir_x, ray_dir_y);
-		x += 20;
+		r.camera_x = 2.0f * r.x / WIN_WIDTH - 1.0f;
+		r.ray_dir_x = r.cos_angle + r.plane_x * r.camera_x;
+		r.ray_dir_y = r.sin_angle + r.plane_y * r.camera_x;
+		draw_single_miniray(data, r.ray_dir_x, r.ray_dir_y);
+		r.x += 20;
 	}
 }
 
