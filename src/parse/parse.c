@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ptrapero <ptrapero@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/28 13:53:10 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/22 19:38:48 by ptrapero         ###   ########.fr       */
+/*   Updated: 2026/06/24 20:04:48 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ int	parse_file(t_data *data)
 		|| !data->north_set || !data->south_set
 		|| !data->east_set || !data->west_set)
 	{
-		ft_lstclear(&map_lines, free);
-		return (error("mising elements\n"));
+		return (ft_lstclear(&map_lines, free), error("mising elements\n"));
 	}
 	data->floor_color = rgb_to_hex(data->floor_rgb);
 	data->ceiling_color = rgb_to_hex(data->ceiling_rgb);
 	result = parse_map(data, map_lines);
-	check_parse(data);
+	if (CHECK)
+		check_parse(data);
 	ft_lstclear(&map_lines, free);
 	if (result == -1)
 		return (-1);

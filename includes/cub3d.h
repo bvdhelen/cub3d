@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/24 19:56:43 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 20:08:47 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@
 
 // TRUE para ver en 2D; FALSE para ver en 3D
 # define CUB2D 0
+
+// TRUE para checkear; FALSE no cheackea
+# define CHECK 0
 
 typedef struct s_flood
 {
@@ -245,10 +248,10 @@ int		touch_wall(t_data *data, float pos_x, float pos_y);
 void	move_player(t_data *data, t_player *player);
 
 void	draw_wall(t_data *data, int x);
-int		draw_loop(t_data *data);
 
-void	draw_all_rays_2d(t_data *data);
 int		load_textures(t_data *data);
+
+int		draw_loop(t_data *data);
 
 //minimap
 void	draw_minimap(t_data *data);
@@ -264,7 +267,7 @@ void	draw_vertical_line(t_data *data, t_wall *wall, t_ray *ray);
 void	draw_h_border(t_data *data, t_border b);
 void	draw_v_border(t_data *data, t_border b);
 void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y);
-
+void	draw_all_rays_2d(t_data *data);
 void	get_wall_info(t_data *data, t_ray *ray);
 
 #endif
