@@ -50,6 +50,7 @@ SRC =	src/main.c \
 		src/init/init.c \
 		src/hooks/hooks.c \
 		src/render/drawing.c \
+		src/render/drawing_utils.c \
 		src/render/move.c \
 		src/render/render.c \
 		src/render/render_utils.c \

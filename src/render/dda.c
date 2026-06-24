@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:48:31 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/24 16:30:36 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:57:00 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,36 +100,31 @@ void	calc_perp_distance(t_ray *ray)
 }
 
 // 5. draw_vertical_line (dibuja techo, pared, suelo)
-void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int line_height, int real_start)
+void	draw_vertical_line(t_data *data, t_wall *wall, t_ray *ray)
 {
-	int		y;
-	int		tex_x;
-	int		tex_y;
-	int		color;
-	float	step;
-	float	tex_pos;
+	t_texdraw	t;
 
-	tex_x = (int)(ray->wall_x * (ray->texture->width - 1));
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= ray->texture->width)
-		tex_x = ray->texture->width - 1;
-	step = (float)ray->texture->height / (float)line_height;
-	tex_pos = (start - real_start) * step;
-	y = 0;
-	while (y < start)
-		put_pixel(data, x, y++, data->ceiling_color);
-	while (y < end)
+	t.tex_x = (int)(ray->wall_x * (ray->texture->width - 1));
+	if (t.tex_x < 0)
+		t.tex_x = 0;
+	if (t.tex_x >= ray->texture->width)
+		t.tex_x = ray->texture->width - 1;
+	t.step = (float)ray->texture->height / wall->line_height;
+	t.tex_pos = (wall->start - wall->real_start) * t.step;
+	t.y = 0;
+	while (t.y < wall->start)
+		put_pixel(data, wall->x, t.y++, data->ceiling_color);
+	while (t.y < wall->end)
 	{
-		tex_y = (int)tex_pos;
-		if (tex_y >= ray->texture->height)
-			tex_y = ray->texture->height - 1;
-		color = *(int *)(ray->texture->addr
-				+ (tex_y * ray->texture->line_len + tex_x
+		t.tex_y = (int)t.tex_pos;
+		if (t.tex_y >= ray->texture->height)
+			t.tex_y = ray->texture->height - 1;
+		t.color = *(int *)(ray->texture->addr
+				+ (t.tex_y * ray->texture->line_len + t.tex_x
 					* (ray->texture->bpp / 8)));
-		put_pixel(data, x, y++, color);
-		tex_pos += step;
+		put_pixel(data, wall->x, t.y++, t.color);
+		t.tex_pos += t.step;
 	}
-	while (y < WIN_HEIGHT)
-		put_pixel(data, x, y++, data->floor_color);
+	while (t.y < WIN_HEIGHT)
+		put_pixel(data, wall->x, t.y++, data->floor_color);
 }

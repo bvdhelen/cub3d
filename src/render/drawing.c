@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/13 20:23:33 by bvdhelen          #+#    #+#             */
-/*   Updated: 2026/06/20 17:39:35 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:55:13 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,38 +69,6 @@ void	draw_map(t_data *data)
 	}
 }
 
-// Bordes horizontales (arriba y abajo)
-void	draw_h_border(t_data *data, int y, int x_start, int x_end, int color)
-{
-	int	x;
-
-	if (y < 0 || y >= WIN_HEIGHT)
-		return ;
-	x = x_start;
-	while (x <= x_end)
-	{
-		if (x >= 0 && x < WIN_WIDTH)
-			put_pixel(data, x, y, color);
-		x++;
-	}
-}
-
-// Bordes verticales (izquierda y derecha, sin repetir esquinas)
-void	draw_v_border(t_data *data, int x, int y_start, int y_end, int color)
-{
-	int	y;
-
-	if (x < 0 || x >= WIN_WIDTH)
-		return ;
-	y = y_start;
-	while (y <= y_end)
-	{
-		if (y >= 0 && y < WIN_HEIGHT)
-			put_pixel(data, x, y, color);
-		y++;
-	}
-}
-
 void	draw_player(t_data *data, float cell_x, float cell_y, int color)
 {
 	int	px;
@@ -116,63 +84,25 @@ void	draw_player(t_data *data, float cell_x, float cell_y, int color)
 	draw_v_border(data, px + half, py - half + 1, py + half - 1, color);
 }
 
-static void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y)
-{
-	float	ray_x;
-	float	ray_y;
-	int		steps;
-	int		sx;
-	int		sy;
-	int		hit_x;
-	int		hit_y;
-
-	ray_x = data->player.x;
-	ray_y = data->player.y;
-	steps = 0;
-	while (!touch_wall(data, ray_x, ray_y) && steps < 200)
-	{
-		sx = (int)(ray_x * TILE_SIZE);
-		sy = (int)(ray_y * TILE_SIZE);
-		if (sx >= 0 && sx < WIN_WIDTH && sy >= 0 && sy < WIN_HEIGHT)
-			put_pixel(data, sx, sy, 0x00FF00);
-		ray_x += dir_x * 0.2f;
-		ray_y += dir_y * 0.2f;
-		steps++;
-	}
-	if (steps < 200)
-	{
-		hit_x = (int)(ray_x * TILE_SIZE);
-		hit_y = (int)(ray_y * TILE_SIZE);
-		put_pixel(data, hit_x, hit_y, 0xFF0000);
-	}
-}
-
 /* Dibuja en 2D todos los rayos */
 // Dibujamos un rayo cada 2 píxeles de ancho de pantalla
 // Avanzar mientras no toque pared y no salga del mapa (máximo 200 pasos)
 // Punto de impacto (rojo)
 void	draw_all_rays_2d(t_data *data)
 {
-	float	cos_angle;
-	float	sin_angle;
-	float	plane_x;
-	float	plane_y;
-	int		x;
-	float	camera_x;
-	float	ray_dir_x;
-	float	ray_dir_y;
+	t_ray2d	r;
 
-	cos_angle = cosf(data->player.angle);
-	sin_angle = sinf(data->player.angle);
-	plane_x = -sin_angle * 0.66f;
-	plane_y = cos_angle * 0.66f;
-	x = 0;
-	while (x < WIN_WIDTH)
+	r.cos_angle = cosf(data->player.angle);
+	r.sin_angle = sinf(data->player.angle);
+	r.plane_x = -r.sin_angle * 0.66f;
+	r.plane_y = r.cos_angle * 0.66f;
+	r.x = 0;
+	while (r.x < WIN_WIDTH)
 	{
-		camera_x = 2.0f * x / WIN_WIDTH - 1.0f;
-		ray_dir_x = cos_angle + plane_x * camera_x;
-		ray_dir_y = sin_angle + plane_y * camera_x;
-		draw_single_ray_2d(data, ray_dir_x, ray_dir_y);
-		x += 2;
+		r.camera_x = 2.0f * r.x / WIN_WIDTH - 1.0f;
+		r.ray_dir_x = r.cos_angle + r.plane_x * r.camera_x;
+		r.ray_dir_y = r.sin_angle + r.plane_y * r.camera_x;
+		draw_single_ray_2d(data, r.ray_dir_x, r.ray_dir_y);
+		r.x += 2;
 	}
 }

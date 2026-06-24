@@ -6,7 +6,7 @@
 /*   By: bvdhelen <bvdhelen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:37:47 by eldiaz-c          #+#    #+#             */
-/*   Updated: 2026/06/24 16:21:07 by bvdhelen         ###   ########.fr       */
+/*   Updated: 2026/06/24 17:50:59 by bvdhelen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,38 @@ typedef struct s_ray
 	t_texture	*texture; // puntero a la textura a usar
 }	t_ray;
 
+//2D
+typedef struct s_wall
+{
+	int	x;
+	int	start;
+	int	end;
+	int	line_height;
+	int	real_start;
+}	t_wall;
+
+typedef struct s_ray2d
+{
+	float	cos_angle;
+	float	sin_angle;
+	float	plane_x;
+	float	plane_y;
+	float	camera_x;
+	float	ray_dir_x;
+	float	ray_dir_y;
+	int		x;
+}	t_ray2d;
+
+typedef struct s_texdraw
+{
+	int		y;
+	int		tex_x;
+	int		tex_y;
+	int		color;
+	float	step;
+	float	tex_pos;
+}	t_texdraw;
+
 //init
 t_data	*init_data(void);
 int		init_fd(char **argv, t_data *data);
@@ -218,8 +250,13 @@ void	init_ray_direction(t_data *data, int x, t_ray *ray);
 void	init_step_and_side(t_data *data, t_ray *ray);
 int		dda_loop(t_data *data, t_ray *ray);
 void	calc_perp_distance(t_ray *ray);
-//void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray);
-void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int line_height, int real_start);
+void	draw_vertical_line(t_data *data, t_wall *wall, t_ray *ray);
+//void	draw_vertical_line(t_data *data, int x, int start, int end, t_ray *ray, int line_height, int real_start);
+
+//drawing??
+void	draw_h_border(t_data *data, int y, int x_start, int x_end, int color);
+void	draw_v_border(t_data *data, int x, int y_start, int y_end, int color);
+void	draw_single_ray_2d(t_data *data, float dir_x, float dir_y);
 
 void	get_wall_info(t_data *data, t_ray *ray);
 
